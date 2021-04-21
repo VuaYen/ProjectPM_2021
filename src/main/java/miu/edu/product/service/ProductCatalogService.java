@@ -17,7 +17,7 @@ public class ProductCatalogService {
 
 	public void addProduct(Integer productnumber, String description, double price,Vendor vendor) {
 
-		Product product = new Product(productnumber,"","Test", price,description,new Date(),null,null,  vendor);
+		Product product = new Product(productnumber,"","Test", price,description,new Date(),null,null,  vendor,0);
 		productRepository.save(product);
 		
 	}
