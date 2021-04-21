@@ -48,6 +48,8 @@ public class Product {
 	@JoinColumn(name = "vendorId")
 	private Vendor vendor;
 
+	private Integer quantity;
+
 	public Product(Integer productnumber,Double price,String description,Vendor vendor) {
 		this.productnumber= productnumber;
 		this.price = price;
