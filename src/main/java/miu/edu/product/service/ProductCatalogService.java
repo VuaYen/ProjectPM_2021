@@ -7,6 +7,7 @@ import miu.edu.product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -16,7 +17,7 @@ public class ProductCatalogService {
 
 	public void addProduct(Integer productnumber, String description, double price,Vendor vendor) {
 
-		Product product = new Product(productnumber, price,description,  vendor);
+		Product product = new Product(productnumber,"","Test", price,description,new Date(),null,null,  vendor);
 		productRepository.save(product);
 		
 	}

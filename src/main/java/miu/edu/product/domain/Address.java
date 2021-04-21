@@ -3,12 +3,12 @@ package miu.edu.product.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-//import javax.persistence.Embeddable;
+import javax.persistence.Embeddable;
 
 
 @Setter
 @Getter
-//@Embeddable
+@Embeddable
 public class Address {
 	private String street;
 	private String city;

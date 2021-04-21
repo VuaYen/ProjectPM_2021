@@ -1,6 +1,7 @@
 package miu.edu.product.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -35,8 +37,12 @@ public class Vendor {
 	@Column(unique = true)
 	private String userName;
 
-//	@Embedded
-//	private Address address;
+	@Embedded
+	private Address address;
+
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "vendor")
+	private List<Product> products;
 
 
 }
