@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import miu.edu.product.sender.Subject;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
@@ -18,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class OnlineOrder {
+public class OnlineOrder extends Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
