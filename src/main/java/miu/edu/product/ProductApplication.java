@@ -17,7 +17,7 @@ public class ProductApplication {
     CommandLineRunner runner(ProductRepository productRepository) {
         return args -> {
             Product product = new Product();
-            product.setProductnumber(1);
+//            product.setProductnumber(1);
             product.setDescription("Iphone13");
             product.setName("Iphone13");
             productRepository.save(product);
