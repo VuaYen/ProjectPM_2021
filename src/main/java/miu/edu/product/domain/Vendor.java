@@ -19,7 +19,7 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "vendor")
-public class Vendor extends User {
+public class Vendor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
