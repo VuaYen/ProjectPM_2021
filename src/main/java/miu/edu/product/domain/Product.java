@@ -35,6 +35,7 @@ public class Product {
 	@NotEmpty(message = "{error.string.empty}")
 	private String photo;
 	private Date createdDate;
+	private ProductStatus status;
 
 	@Transient
 	private MultipartFile image;

@@ -1,0 +1,32 @@
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">description</th>
+        <th scope="col">Created Date</th>
+        <th scope="col">price</th>
+        <th scope="col">photo</th>
+        <th scope="col">productstatus</th>
+<!--        <th scope="col">Category</th>-->
+        <th scope="col">Vendor</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.productnumber }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.createdDate }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.photo }}</td>
+        <td>{{ product.status }}</td>
+<!--        <td>{{ product.category.name }}</td>-->
+        <td>{{ product.vendor.userName }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
