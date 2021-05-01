@@ -1,14 +1,14 @@
 package miu.edu.product.web;
 
 
-import miu.edu.pmcs490.domain.OnlineOrder;
-import miu.edu.pmcs490.domain.OrderDetail;
-import miu.edu.pmcs490.domain.OrderStatus;
-import miu.edu.pmcs490.domain.Product;
-import miu.edu.pmcs490.dto.Cart;
-import miu.edu.pmcs490.dto.CheckOutModel;
-import miu.edu.pmcs490.dto.RemoveCartModel;
-import miu.edu.pmcs490.service.ProductService;
+import miu.edu.product.domain.OnlineOrder;
+import miu.edu.product.domain.OrderDetail;
+import miu.edu.product.domain.OrderStatus;
+import miu.edu.product.domain.Product;
+import miu.edu.product.dto.Cart;
+import miu.edu.product.dto.CheckOutModel;
+import miu.edu.product.dto.RemoveCartModel;
+import miu.edu.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
