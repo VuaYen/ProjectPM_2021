@@ -1,9 +1,6 @@
 package miu.edu.product.service;
 
 
-
-
-
 public class ProductDTO {
 
 	Integer productnumber;
