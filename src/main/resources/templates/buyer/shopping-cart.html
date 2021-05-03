@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/user/ulayout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart</title>
+</head>
+<body>
+<div layout:fragment="user-main-content">
+    <main class="main">
+        <div class="page-content">
+            <div class="cart">
+                <div class="container">
+                    <p th:if="${myCart.orderList.size() == 0}">
+                        There are nothing in your cart.
+                    </p>
+                    <div class="row cart-section" th:each="order: ${myCart.orderList}"
+                         th:id="${'seller-section-' + order.getKey().toString()}">
+                        <div class="col-lg-9">
+                            <table class="table table-cart table-mobile">
+                                <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr th:each="orderDetail: ${order.getValue().orderDetailList}"
+                                    th:id="${'cart-item-' + orderDetail.product.productnumber.toString()}">
+                                    <td class="product-col">
+                                        <div class="product">
+                                            <figure class="product-media">
+                                                <a href="#">
+                                                    <img th:src="@{${orderDetail.product.photo}}" alt="Product image">
+                                                </a>
+                                            </figure>
+
+                                            <h3 class="product-title">
+                                                <a href="#" th:text="${orderDetail.product.name}">Product name</a>
+                                            </h3><!-- End .product-title -->
+                                        </div><!-- End .product -->
+                                    </td>
+                                    <td class="price-col" th:text="${orderDetail.sellPrice}">$amount</td>
+                                    <td class="quantity-col">
+                                        <div class="cart-product-quantity">
+                                            <input type="number" class="form-control cart-item-spinner-qty" th:value="${orderDetail.qty}"
+                                                   min="1" max="10" th:data-product-id="${orderDetail.product.productnumber}"
+                                                   step="1" data-decimals="0" required>
+                                        </div><!-- End .cart-product-quantity -->
+                                    </td>
+                                    <td class="total-col" th:text="${'$' + #numbers.formatDecimal(orderDetail.qty*orderDetail.sellPrice, 0, 'COMMA', 2, 'POINT')}">
+                                        $total
+                                    </td>
+                                    <td class="remove-col">
+                                        <button th:data-product-id="${orderDetail.product.productnumber}"
+                                                class="btn-remove btn-remove-from-cart"><i
+                                                class="icon-close"></i></button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="cart-bottom">
+                                <a href="#"
+                                   class="btn btn-outline-dark-2"><span>PROCEED TO CHECKOUT</span><i
+                                        class="icon-cc-mastercard"></i></a>
+                            </div>
+                        </div>
+                        <aside class="col-lg-3">
+                            <div class="summary summary-cart">
+                                <h3 class="summary-title"
+                                    >
+                                    Seller name</h3>
+
+                                <table class="table table-summary">
+                                    <tbody>
+                                    <tr class="summary-subtotal">
+                                        <td>Subtotal:</td>
+                                        <td class="sub-total" th:text="${#numbers.formatDecimal(order.getValue().total - order.getValue().tax - order.getValue().shippingFee, 0, 'COMMA', 2, 'POINT')}">
+                                            $subtotal
+                                        </td>
+                                    </tr><!-- End .summary-subtotal -->
+
+                                    <tr class="summary-subtotal">
+                                        <td>Tax:</td>
+                                        <td class="tax" th:text="${#numbers.formatDecimal(order.getValue().tax, 0, 'COMMA', 2, 'POINT')}">
+                                            $tax
+                                        </td>
+                                    </tr><!-- End .summary-subtotal -->
+
+                                    <tr class="summary-subtotal">
+                                        <td>Shipping Fee:</td>
+                                        <td class="shipping-fee" th:text="${#numbers.formatDecimal(order.getValue().shippingFee, 0, 'COMMA', 2, 'POINT')}">
+                                            $shippingFee
+                                        </td>
+                                    </tr><!-- End .summary-subtotal -->
+
+                                    <tr class="summary-total">
+                                        <td>Total:</td>
+                                        <td class="total" th:text="${#numbers.formatDecimal(order.getValue().total, 0, 'COMMA', 2, 'POINT')}">
+                                            $total
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </aside>
+                    </div>
+
+                </div><!-- End .container -->
+            </div><!-- End .cart -->
+        </div><!-- End .page-content -->
+    </main>
+</div>
+</body>
+</html>

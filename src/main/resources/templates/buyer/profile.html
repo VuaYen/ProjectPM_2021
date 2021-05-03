@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/user/ulayout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <style>
+        .error{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="user-main-content">
+    <!--h1>Profile</h1-->
+    <main class="main">
+        <div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17"
+             style="background-image: url('assets/images/backgrounds/login-bg.jpg')">
+            <div class="container">
+                <div class="form-box">
+                    <div class="form-tab">
+                        <ul class="nav nav-pills nav-fill" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="register-tab-2" data-toggle="tab" href="#register-2"
+                                   role="tab" aria-controls="register-2" aria-selected="true">Profile</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="register-2" role="tabpanel"
+                                 aria-labelledby="register-tab-2">
+    <form method="post" th:action="@{saveProfile}" th:object="${accBuyer}">
+        <!--ul th:if="${#fields.hasErrors('*')}">
+            <li th:each="err : ${#fields.errors('*')}" th:text="${err}" >Input is incorrect</li>
+        </ul-->
+        <div class="form-group">
+            <label for="username" th:text="#{reg.username}">Username *</label>
+            <input type="text" class="form-control" id="username" th:field="*{username}" th:value="*{username}"
+                   name="register-uname" disabled>
+            <!--span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" th:errorclass="error"></span-->
+        </div><!-- End .form-group -->
+        <!--div class="form-group">
+            <label for="register-password-2" th:text="#{reg.password}">Password *</label>
+            <input type="text" class="form-control" id="register-password-2" th:field="*{password}" th:value="*{password}"
+                   name="register-password" required>
+            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:errorclass="error"></span>
+        </div--><!-- End .form-group -->
+        <div class="form-group">
+            <label for="first-name" th:text="#{reg.firstName}">First name *</label>
+            <input type="text" class="form-control" id="first-name" th:field="*{firstName}" th:value="*{firstName}"
+                   name="reg-first-name" required>
+            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" th:errorclass="error"></span>
+        </div><!-- End .form-group -->
+        <div class="form-group">
+            <label for="last-name" th:text="#{reg.lastName}">Last name *</label>
+            <input type="text" class="form-control" id="last-name" th:field="*{lastName}" th:value="*{lastName}"
+                   name="reg-last-name" required>
+            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" th:errorclass="error"></span>
+        </div><!-- End .form-group -->
+        <div class="form-group">
+            <label for="register-email-2" th:text="#{reg.email}">Email address *</label>
+            <input type="email" class="form-control" id="register-email-2" th:field="*{email}" th:value="*{email}"
+                   name="register-email" required>
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:errorclass="error"></span>
+        </div><!-- End .form-group -->
+        <div class="form-group">
+            <label for="profile-addr-street" th:text="#{reg.addr.street}">Street *</label>
+            <input type="text" class="form-control" id="profile-addr-street" th:field="*{billingAddress.street}" th:value="*{billingAddress.street}"
+                   name="profile-addr-street" required>
+            <span th:if="${#fields.hasErrors('billingAddress.street')}" th:errors="*{billingAddress.street}" th:errorclass="error"></span>
+        </div><!-- End .form-group -->
+        <div class="form-group">
+            <label for="profile-addr-city" th:text="#{reg.addr.city}">City *</label>
+            <input type="text" class="form-control" id="profile-addr-city" th:field="*{billingAddress.city}" th:value="*{billingAddress.city}"
+                   name="profile-addr-city" required>
+            <span th:if="${#fields.hasErrors('billingAddress.city')}" th:errors="*{billingAddress.city}" th:errorclass="error"></span>
+        </div><!-- End .form-group -->
+        <div class="form-group">
+            <label for="profile-addr-state" th:text="#{reg.addr.state}">State *</label>
+            <input type="text" class="form-control" id="profile-addr-state" th:field="*{billingAddress.state}" th:value="*{billingAddress.state}"
+                   name="profile-addr-state" required>
+            <span th:if="${#fields.hasErrors('billingAddress.state')}" th:errors="*{billingAddress.state}" th:errorclass="error"></span>
+        </div><!-- End .form-group -->
+        <div class="form-group">
+            <label for="profile-addr-zipcode" th:text="#{reg.addr.zipcode}">Zip Code *</label>
+            <input type="text" class="form-control" id="profile-addr-zipcode" th:field="*{billingAddress.zipcode}" th:value="*{billingAddress.zipcode}"
+                   name="profile-addr-zipcode" required>
+            <span th:if="${#fields.hasErrors('billingAddress.zipcode')}" th:errors="*{billingAddress.zipcode}" th:errorclass="error"></span>
+        </div><!-- End .form-group -->
+        <div class="form-group">
+            <label for="profile-payment" th:text="#{reg.payment}">Payment *</label>
+            <input type="text" class="form-control" id="profile-payment" th:field="*{payment}" th:value="*{payment}"
+                   name="payment" required>
+            <span th:if="${#fields.hasErrors('payment')}" th:errors="*{payment}" th:errorclass="error"></span>
+        </div><!-- End .form-group -->
+
+        <div class="form-footer">
+            <button type="submit" class="btn btn-outline-primary-2">
+                <span>SAVE</span>
+                <i class="icon-long-arrow-right"></i>
+            </button>
+        </div>
+    </form>
+                            </div><!-- .End .tab-pane -->
+                        </div><!-- End .tab-content -->
+                    </div><!-- End .form-tab -->
+                </div><!-- End .form-box -->
+            </div><!-- End .container -->
+        </div><!-- End .login-page section-bg -->
+    </main><!-- End .main -->
+</div>
+</body>
+</html>

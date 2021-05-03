@@ -1,0 +1,80 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #vendorForm="ngForm">
+      <div class="form-group">
+        <label for="name">name</label>
+        <input type="text" [(ngModel)]="product.name"
+               class="form-control"
+               id="name"
+               name="name"
+               placeholder="Enter product name"
+               required #name="ngModel">
+      </div>
+      <div [hidden]="!name.pristine" class="alert alert-danger">Name is required</div>
+      <div class="form-group">
+        <label for="description">description</label>
+        <input type="text" [(ngModel)]="product.description"
+               class="form-control"
+               id="description"
+               name="description"
+               placeholder="Enter description"
+               required #description="ngModel">
+      </div>
+      <div [hidden]="!description.pristine" class="alert alert-danger">description is required</div>
+
+      <div class="form-group">
+        <label for="price">price</label>
+        <input type="text" [(ngModel)]="product.price"
+               class="form-control"
+               id="price"
+               name="price"
+               placeholder="Enter price"
+               required #price="ngModel">
+      </div>
+      <div [hidden]="!price.pristine" class="alert alert-danger">price is required</div>
+      <div class="form-group">
+        <label for="photo">Path photo</label>
+        <input type="text" [(ngModel)]="product.photo"
+               class="form-control"
+               id="photo"
+               name="photo"
+               placeholder="Enter photo"
+               required #photo="ngModel">
+        <div [hidden]="!photo.pristine" class="alert alert-danger">photo is required</div>
+      </div>
+<!--      <div class="form-group">-->
+<!--        <label for="createdDate">createdDate</label>-->
+<!--        <input type="text" [(ngModel)]="product.createdDate"-->
+<!--               class="form-control"-->
+<!--               id="createdDate"-->
+<!--               name="createdDate"-->
+<!--               placeholder="Enter createdDate"-->
+<!--               required #createdDate="ngModel">-->
+<!--        <div [hidden]="!createdDate.pristine" class="alert alert-danger">createdDate is required</div>-->
+<!--      </div>-->
+      <div class="form-group">
+        <label for="vendorId">vendorId</label>
+        <input type="text" [(ngModel)]="product.vendor.id"
+               class="form-control"
+               id="vendorId"
+               name="vendorId"
+               placeholder="Enter vendorId"
+               required #vendorId="ngModel">
+        <div [hidden]="!vendorId.pristine" class="alert alert-danger">vendorId is required</div>
+      </div>
+      <div class="form-group">
+        <label for="categoryId">catId</label>
+        <input type="text" [(ngModel)]="product.category.id"
+               class="form-control"
+               id="categoryId"
+               name="categoryId"
+               placeholder="Enter categoryId"
+               required #categoryId="ngModel">
+        <div [hidden]="!categoryId.pristine" class="alert alert-danger">categoryId is required</div>
+      </div>
+      <button type="submit" [disabled]="!vendorForm.form.valid"
+              class="btn btn-info">Submit</button>
+    </form>
+  </div>
+</div>
+

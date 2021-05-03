@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/user/ulayout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Access Denied</title>
+</head>
+<body>
+<div layout:fragment="user-main-content">
+    <main class="main">
+
+        <div class="error-content text-center" style="background-image: url(assets/images/backgrounds/error-bg.jpg)">
+            <div class="container">
+                <h1 class="error-title">Error 404</h1><!-- End .error-title -->
+                <p>You are not allowed to enter the section you were trying to access!</p>
+                <a th:href="@{/}" class="btn btn-outline-primary-2 btn-minwidth-lg">
+                    <span>BACK TO HOMEPAGE</span>
+                    <i class="icon-long-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

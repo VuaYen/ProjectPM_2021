@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/user/ulayout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Check Out</title>
+</head>
+<body>
+<div layout:fragment="user-main-content">
+    <main class="main">
+        <div class="page-content">
+            <div class="checkout">
+                <div class="container">
+                    <form th:action="@{/check-out}" th:object="${model}" method="post">
+                        <div class="row">
+
+                            <div class="col-lg-9">
+                                <h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label>First Name *</label>
+                                        <input type="text" class="form-control"  readonly>
+                                    </div><!-- End .col-sm-6 -->
+
+                                    <div class="col-sm-6">
+                                        <label>Last Name *</label>
+                                        <input type="text" class="form-control"  readonly>
+                                    </div><!-- End .col-sm-6 -->
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label>Email *</label>
+                                        <input type="text" class="form-control"  readonly>
+                                    </div><!-- End .col-sm-6 -->
+
+                                    <div class="col-sm-6">
+                                        <label>City *</label>
+                                        <input type="text" class="form-control"
+                                               readonly>
+                                    </div><!-- End .col-sm-6 -->
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label>State *</label>
+                                        <input type="text" class="form-control" readonly>
+                                    </div><!-- End .col-sm-6 -->
+
+                                    <div class="col-sm-6">
+                                        <label>City *</label>
+                                        <input type="text" class="form-control"
+                                                readonly>
+                                    </div><!-- End .col-sm-6 -->
+                                </div>
+                                <label>Address *</label>
+                                <textarea type="text" class="form-control"
+                                          placeholder="House number and Street name" readonly>
+                                    </textarea>
+
+                                <div class="text-left">
+                                    <input type="checkbox" id="checkout-diff-address">
+                                    <label class="custom-control-label" for="checkout-diff-address">Ship to a
+                                        different address?</label>
+                                </div><!-- End .custom-checkbox -->
+
+                                <div class="shipping-address" style="display: none;">
+                                    <h2 class="checkout-title">Shipping Details</h2><!-- End .checkout-title -->
+                                    <label>Address *</label>
+                                    <textarea th:field="*{order.shippingAddress}" id="order-shippingAddress" value="" type="text"
+                                              class="form-control"
+                                              placeholder="House number and Street name">
+                                        </textarea>
+                                </div>
+
+
+                            </div><!-- End .col-lg-9 -->
+                            <aside class="col-lg-3">
+                                <div class="summary">
+                                    <h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
+
+                                    <table class="table table-summary">
+                                        <tbody>
+                                        <tr class="summary-subtotal">
+                                            <td>Subtotal:</td>
+                                            <td th:text="${#numbers.formatDecimal(model.order.total - model.order.tax - model.order.shippingFee, 0, 'COMMA', 2, 'POINT')}">
+                                                $160.00
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shipping:</td>
+                                            <td th:text="${#numbers.formatDecimal(model.order.shippingFee, 0, 'COMMA', 2, 'POINT')}">
+                                                Free shipping
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tax:</td>
+                                            <td th:text="${#numbers.formatDecimal(model.order.tax, 0, 'COMMA', 2, 'POINT')}">
+                                                $16.00
+                                            </td>
+                                        </tr>
+                                        <tr class="summary-total">
+                                            <td>Total:</td>
+                                            <td th:text="${#numbers.formatDecimal(model.order.total, 0, 'COMMA', 2, 'POINT')}">
+                                                $160.00
+                                            </td>
+                                        </tr><!-- End .summary-total -->
+                                        <tr th:if="${model.points > 0}" class="summary-total">
+                                            <td>Points used:</td>
+                                            <td id="cell-points">
+                                                0
+                                            </td>
+                                        </tr><!-- End .summary-total -->
+                                        </tbody>
+                                    </table><!-- End .table table-summary -->
+
+                                    <a th:if="${model.points > 0}" href="javascript: void(0);"
+                                       class="btn btn-outline-primary-2 btn-order btn-block btn-point-modal"
+                                       data-toggle="modal" data-target="#point-modal">
+                                        <span class="btn-text">Use points</span>
+                                        <span class="btn-hover-text">Use points</span>
+                                    </a>
+                                    <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
+                                        <span class="btn-text">Place Order</span>
+                                        <span class="btn-hover-text">Place Order</span>
+                                    </button>
+                                </div><!-- End .summary -->
+                            </aside><!-- End .col-lg-3 -->
+                        </div><!-- End .row -->
+                    </form>
+                </div><!-- End .container -->
+            </div><!-- End .checkout -->
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+
+    <div class="modal fade" id="point-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"
+                        th:text="${'You have ' + model.points.toString() + ' point(s)'}">Point</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="padding: 16px;">
+                    <form action="#">
+                        <div class="form-group">
+                            <label class="col-form-label">Points:</label>
+                            <input type="number" min="0" th:max="${model.points}" class="form-control" id="input-points"
+                                   name="points">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btn-use-points" class="btn btn-primary">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
