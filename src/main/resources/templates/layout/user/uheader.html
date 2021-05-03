@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+</head>
+<body>
+<header class="header header-intro-clearance header-4" th:fragment="fragheader">
+    <div class="header-top">
+        <div class="container">
+            <div class="header-right">
+                <ul class="top-menu">
+                    <li>
+                        <ul>
+                            <li><a th:href="@{/login}">Sign in</a></li>
+                            <li><a th:href="@{/reg}">Sign up</a></li>
+                        </ul>
+                    </li>
+                    <li >
+                        <ul>
+                            <li>Hello, <span ></span></li>
+                            <li><a th:href="@{/logout}">Sign out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- End .header-right -->
+
+        </div><!-- End .container -->
+    </div><!-- End .header-top -->
+
+    <div class="header-middle">
+        <div class="container">
+            <div class="header-left">
+                <button class="mobile-menu-toggler">
+                    <span class="sr-only">Toggle mobile menu</span>
+                    <i class="icon-bars"></i>
+                </button>
+
+                <a href="/" class="logo">
+                    <img th:src="@{/assets/images/demos/demo-4/logo.png}" alt="Group3 CS490PM" width="105" height="25">
+                </a>
+            </div><!-- End .header-left -->
+
+
+            <div class="header-right">
+                <div  class="dropdown compare-dropdown">
+                    <a th:href="@{/profile}" class="dropdown-toggle"
+                       aria-haspopup="true" aria-expanded="false"
+                       title="Profile" aria-label="Profile">
+                        <div class="icon">
+                            <i class="icon-user"></i>
+                        </div>
+                        <p>Profile</p>
+                    </a>
+                </div>
+                <div class="dropdown cart-dropdown">
+                    <a th:href="@{/shopping-cart}" class="dropdown-toggle" role="button">
+                        <div class="icon">
+                            <i class="icon-shopping-cart"></i>
+<!--                            <span class="cart-count" th:id="cart-count" th:text="${myCart.total}">1</span>-->
+                            <span class="cart-count" th:id="cart-count" th:text="${myCart.total}" >1</span>
+                        </div>
+                        <p>Cart</p>
+                    </a>
+                </div><!-- End .cart-dropdown -->
+            </div><!-- End .header-right -->
+        </div><!-- End .container -->
+    </div><!-- End .header-middle -->
+
+    <div class="header-bottom sticky-header">
+        <div class="container">
+
+            <div class="header-center">
+                <nav class="main-nav">
+                    <ul class="menu">
+                        <li class="megamenu-container active">
+                            <a th:href="@{/}" class="sf-with-ul">Home</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/about}" class="sf-with-ul">About us</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/contact}" class="sf-with-ul">Contact</a>
+                        </li>
+                    </ul><!-- End .menu -->
+                </nav><!-- End .main-nav -->
+            </div><!-- End .header-center -->
+        </div><!-- End .container -->
+    </div><!-- End .header-bottom -->
+</header><!-- End .header -->
+</body>
+</html>

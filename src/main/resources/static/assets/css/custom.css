@@ -1,0 +1,12 @@
+.top-menu {
+  padding: 10px 0px;
+}
+
+.cart-section {
+  border-bottom: 2px dashed gray;
+  margin: 10px 0px;
+}
+
+.val-error{
+   color: red;
+}

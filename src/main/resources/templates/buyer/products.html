@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/user/ulayout}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Products</title>
+</head>
+<body>
+<div layout:fragment="user-main-content">
+    <main class="main">
+        <div class="mb-5"></div>
+        <div class="container for-you">
+            <div class="heading heading-flex mb-3">
+                <div class="heading-left">
+                    <h2 class="title"><span th:text="${title}">Product List</span></h2><!-- End .title -->
+                </div><!-- End .heading-left -->
+
+            </div><!-- End .heading -->
+
+            <div class="products">
+                <div class="row justify-content-center">
+                    <th:block th:each="prot : ${productlist}">
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="product product-2">
+                                <figure class="product-media">
+                                    <span class="product-label label-sale"><span th:text="${prot.productnumber}"></span>points</span>
+                                    <a th:href="@{'/product?pid='+${prot.productnumber}}">
+                                        <img th:src="${prot.photo}" th:alt="${prot.name}" class="product-image">
+                                    </a>
+
+                                    <div class="product-action">
+                                        <a href="#" th:attr="data-product-id=${prot.productnumber},data-seller=${prot.vendor.getUserName()},id='add-cart-link-'+${prot.productnumber}"
+                                           class="btn-product btn-cart"><span>add to cart</span></a>
+                                        <a th:href="@{'/follows?type='+${typep}+'&user='+${prot.vendor.getUserName()}}" class="btn-product btn-wishlist"><span th:text="${follow}" >follow </span></a>
+                                    </div><!-- End .product-action -->
+                                </figure><!-- End .product-media -->
+
+                                <div class="product-body">
+                                    <div class="product-cat">
+                                        <a th:href="@{'/products?cat='+${prot.category.id}}"><span th:text="${prot.category.name}"></span></a>
+                                    </div><!-- End .product-cat -->
+                                    <h3 class="product-title"><a th:href="@{'/product?pid='+${prot.productnumber}}"><span th:text="${prot.name} "></span></a></h3>
+                                    <!-- End .product-title -->
+                                    <div class="product-price">
+                                        $<span th:text="${prot.price} "></span>
+                                    </div><!-- End .product-price -->
+                                    <div class="ratings-container">
+                                        <span class="ratings-text"><span th:text="${prot.category.name}" ></span> Category</span>
+                                    </div><!-- End .rating-container -->
+
+
+                                </div><!-- End .product-body -->
+                            </div><!-- End .product -->
+                        </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+                    </th:block>
+
+                </div><!-- End .row -->
+            </div><!-- End .products -->
+        </div><!-- End .container -->
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link page-link-prev" href="#" aria-label="Previous" tabindex="-1" aria-disabled="true">
+                        <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>Prev
+                    </a>
+                </li>
+                <li class="page-item active" aria-current="page"><a class="page-link" href="#" th:href="@{'/products?&pcur=1'}">1</a></li>
+                <li class="page-item"><a class="page-link" href="#" th:href="@{'/products?pcur=2'}">2</a></li>
+                <li class="page-item"><a class="page-link" href="#" th:href="@{'/products?&pcur=3'}">3 </a></li>
+                <li class="page-item-total">of  <span th:text="${page} "> 6</span></li>
+                <li class="page-item">
+                    <a class="page-link page-link-next" href="#" aria-label="Next">
+                        Next <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="mb-4"></div><!-- End .mb-4 -->
+
+        <div class="container">
+            <hr class="mb-0">
+        </div><!-- End .container -->
+
+        <div class="icon-boxes-container bg-transparent">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="icon-box icon-box-side">
+                                <span class="icon-box-icon text-dark">
+                                    <i class="icon-rocket"></i>
+                                </span>
+                            <div class="icon-box-content">
+                                <h3 class="icon-box-title">Free Shipping</h3><!-- End .icon-box-title -->
+                                <p>Orders $50 or more</p>
+                            </div><!-- End .icon-box-content -->
+                        </div><!-- End .icon-box -->
+                    </div><!-- End .col-sm-6 col-lg-3 -->
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="icon-box icon-box-side">
+                                <span class="icon-box-icon text-dark">
+                                    <i class="icon-rotate-left"></i>
+                                </span>
+
+                            <div class="icon-box-content">
+                                <h3 class="icon-box-title">Free Returns</h3><!-- End .icon-box-title -->
+                                <p>Within 30 days</p>
+                            </div><!-- End .icon-box-content -->
+                        </div><!-- End .icon-box -->
+                    </div><!-- End .col-sm-6 col-lg-3 -->
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="icon-box icon-box-side">
+                                <span class="icon-box-icon text-dark">
+                                    <i class="icon-info-circle"></i>
+                                </span>
+
+                            <div class="icon-box-content">
+                                <h3 class="icon-box-title">Get 20% Off 1 Item</h3><!-- End .icon-box-title -->
+                                <p>when you sign up</p>
+                            </div><!-- End .icon-box-content -->
+                        </div><!-- End .icon-box -->
+                    </div><!-- End .col-sm-6 col-lg-3 -->
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="icon-box icon-box-side">
+                                <span class="icon-box-icon text-dark">
+                                    <i class="icon-life-ring"></i>
+                                </span>
+
+                            <div class="icon-box-content">
+                                <h3 class="icon-box-title">We Support</h3><!-- End .icon-box-title -->
+                                <p>24/7 amazing services</p>
+                            </div><!-- End .icon-box-content -->
+                        </div><!-- End .icon-box -->
+                    </div><!-- End .col-sm-6 col-lg-3 -->
+                </div><!-- End .row -->
+            </div><!-- End .container -->
+        </div><!-- End .icon-boxes-container -->
+    </main><!-- End .main -->
+</div>
+</body>
+</html>
