@@ -1,9 +1,9 @@
 package miu.edu.product.domain;
 import javax.persistence.Entity;
 
-@Entity
+//@Entity
 public class Payment {
-    @javax.persistence.Id
+//    @javax.persistence.Id
     private Long Id;
     private String cardName;
     private String cardNumber;

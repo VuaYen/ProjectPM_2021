@@ -4,9 +4,9 @@ spring:
     admin:
       enabled: false
   datasource:
-    url: jdbc:mysql://localhost:3306
-    username: root
-    password: root
+    url: jdbc:mysql://localhost:3306/projectcs490j2?serverTimezone=America/Chicago
+    username: cs490j2
+    password: cs490j2
     driverClassName: com.mysql.cj.jdbc.Driver
   #  data: classpath:/data.sql
   #  initialization-mode: always
