@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Getter
@@ -31,11 +32,12 @@ public class OnlineOrder extends Subject {
     private Date dateShipping;
 
     private Double tax;
-    private Date dateCreate;
+    private Timestamp dateCreate;
     private Double shippingFee;
     private Double total;
     private String orderno;
-    private String shippingAddress;
+    @Embedded
+    private Address shippingAddress;
     private OrderStatus status;
 
 
