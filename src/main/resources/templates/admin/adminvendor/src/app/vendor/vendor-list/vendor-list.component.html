@@ -1,0 +1,26 @@
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let vendor of vendors">
+        <td>{{ vendor.id }}</td>
+        <td>{{ vendor.firstName }}</td>
+        <td>{{ vendor.lastName }}</td>
+        <td>{{ vendor.gender }}</td>
+        <td>{{ vendor.userName }}</td>
+         <td><a href="mailto:{{ vendor.email }}">{{ vendor.email }}</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

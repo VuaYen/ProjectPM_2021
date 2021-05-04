@@ -1,0 +1,64 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #vendorForm="ngForm">
+      <div class="form-group">
+        <label for="firstName">firstName</label>
+        <input type="text" [(ngModel)]="vendor.firstName"
+               class="form-control"
+               id="firstName"
+               name="firstName"
+               placeholder="Enter your first name"
+               required #firstName="ngModel">
+      </div>
+      <div [hidden]="!firstName.pristine" class="alert alert-danger">First Name is required</div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" [(ngModel)]="vendor.lastName"
+               class="form-control"
+               id="lastName"
+               name="lastName"
+               placeholder="Enter your last name"
+               required #lastName="ngModel">
+      </div>
+      <div [hidden]="!lastName.pristine" class="alert alert-danger">Last Name is required</div>
+      <div >
+        <label for="male">Gender : </label>
+        <input type="radio"  value="Male" required
+               [(ngModel)]="vendor.gender"
+
+               id="male"
+               name="gender"
+                checked="checked"><label> Male </label>
+        <input type="radio"  value="Female"
+               [(ngModel)]="vendor.gender"
+
+               id="female"
+               name="gender"
+              > <label> Female </label>
+      </div>
+      <div class="form-group">
+        <label for="userName">userName</label>
+        <input type="text" [(ngModel)]="vendor.userName"
+               class="form-control"
+               id="userName"
+               name="userName"
+               placeholder="Enter your User name"
+               required #userName="ngModel">
+      </div>
+      <div [hidden]="!userName.pristine" class="alert alert-danger">userName is required</div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" [(ngModel)]="vendor.email"
+               class="form-control"
+               id="email"
+               name="email"
+               placeholder="Enter your email address"
+               required #email="ngModel">
+        <div [hidden]="!email.pristine" class="alert alert-danger">Email is required</div>
+      </div>
+      <button type="submit" [disabled]="!vendorForm.form.valid"
+              class="btn btn-info">Submit</button>
+    </form>
+  </div>
+</div>
+

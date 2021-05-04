@@ -11,6 +11,9 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
+    //not space between two object
+    @Query("SELECT p FROM Product p where p.category.id= :id")
+    List<Product> getByCategory(@Param("id") Integer id);
 
     List<Product> findAllByVendor(Vendor vendor);
 

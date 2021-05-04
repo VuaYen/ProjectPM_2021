@@ -87,4 +87,3 @@ public interface CategoryRepository extends JpaRepository<Category,Integer> {
                                                                     @Param("toDate") Timestamp toDate, @Param("vendorId") String vendorId);
 
 }
-

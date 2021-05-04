@@ -1,6 +1,7 @@
 package miu.edu.product.service;
 
 
+
 import miu.edu.product.domain.Product;
 import miu.edu.product.domain.Vendor;
 import miu.edu.product.repository.ProductRepository;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,9 +17,14 @@ public class ProductCatalogService {
 	@Autowired
 	ProductRepository productRepository;
 
-	public void addProduct(Integer productnumber, String description, double price,Vendor vendor) {
+	public List<Product> getAll(){
+		return productRepository.findAll();
 
-		Product product = new Product(productnumber,"","Test", price,description,new Date(),null,null,  vendor,0);
+	}
+
+	public void addProduct(Integer productnumber, String description, double price, Vendor vendor) {
+
+		Product product = new Product(productnumber,"","Test", price,description,new Date(),null,null,null,  vendor,0);
 		productRepository.save(product);
 		
 	}

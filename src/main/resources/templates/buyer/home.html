@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/user/ulayout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <style>
+        .error {
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="user-main-content">
+    <main class="main">
+
+        <div class="container">
+            <h2 class="title mb-4">Explore Popular Categories</h2><!-- End .title text-center -->
+
+            <div class="cat-blocks-container">
+                <div class="row">
+                    <th:block th:each="cat : ${cats}">
+                    <div class="col-6 col-sm-4 col-lg-2">
+                        <a th:href="@{'/products?cat='+${cat.id}}" class="cat-block">
+                            <figure>
+                                    <span>
+                                        <img th:src="${cat.imageUrl}" th:alt="${cat.name}">
+                                    </span>
+                            </figure>
+
+                            <h3 class="cat-block-title" th:text="${cat.name}">cat name</h3><!-- End .cat-block-title -->
+                        </a>
+                    </div><!-- End .col-sm-4 col-lg-2 -->
+                    </th:block>
+                </div><!-- End .row -->
+
+            </div><!-- End .cat-blocks-container -->
+        </div><!-- End .container -->
+        <div class="mb-4"></div><!-- End .mb-4 -->
+        <div class="bg-light pt-5 pb-6" >
+<!--        <div class="bg-light pt-5 pb-6" th:if="${productlistFlow.size()>0}">-->
+            <div class="container for-you">
+                <div class="heading heading-flex mb-3">
+                    <div class="heading-left">
+                        <h2 class="title">Products of favorite sellers</h2>
+<!--                        <span class="product-label label-sale" th:text="${message}"></span>&lt;!&ndash; End .title &ndash;&gt;-->
+                    </div><!-- End .heading-left -->
+                    <div class="heading-right">
+                        <a href="/products?type=following" class="title-link">View All <i
+                                class="icon-long-arrow-right"></i></a>
+                    </div>
+                </div><!-- End .heading -->
+
+                <div class="products">
+
+                    <div class="row justify-content-center">
+<!--                        begin top product 8 product-->
+                        <th:block th:each="prot : ${productlistFlow}">
+
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="product product-2">
+                                <figure class="product-media">
+                                    <span class="product-label label-sale"><span th:text="${prot.category.name}"></span></span>
+                                    <a th:href="@{'/product?pid='+${prot.productnumber}}">
+                                        <img th:src="${prot.photo}" th:alt="${prot.name}"
+                                              class="product-image">
+                                    </a>
+
+                                    <div class="product-action">
+                                        <a href="#" th:attr="data-product-id=${prot.productnumber},data-seller=${prot.vendor.getUserName()},id='add-cart-link-'+${prot.productnumber}"
+                                           class = "btn-product btn-cart" title="Add to cart"><span>add to
+                                                cart</span></a>
+                                        <a  class="btn-product btn-wishlist"
+                                           title="follow "><span >unfollow </span> </a>
+                                    </div><!-- End .product-action -->
+                                </figure><!-- End .product-media -->
+
+                                <div class="product-body">
+                                    <div class="product-cat">
+                                        <a th:href="@{'/products?cat='+${prot.category.id}}"><span th:text="${prot.category.getName()} "></span></a>
+                                    </div><!-- End .product-cat -->
+                                    <h3 class="product-title"><a th:href="@{'/product?pid='+${prot.productnumber}}"><span th:text="${prot.name} "></span></a></h3><!-- End .product-title -->
+                                    <div class="product-price">
+                                        $<span th:text="${prot.price} "></span>
+                                    </div><!-- End .product-price -->
+                                    <div class="ratings-container">
+                                        <span class="ratings-text"><span th:text="${prot.productnumber}" ></span> Reviews</span>
+                                    </div><!-- End .rating-container -->
+                                </div><!-- End .product-body -->
+                            </div><!-- End .product -->
+                        </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+
+                        </th:block>
+
+<!--                        End  top product-->
+                    </div><!-- End .row -->
+
+                </div><!-- End .products -->
+            </div><!-- End .container -->
+
+        </div><!-- End .bg-light pt-5 pb-6 -->
+
+        <div class="mb-5"></div><!-- End .mb-5 -->
+
+        <div class="container for-you">
+            <div class="heading heading-flex mb-3">
+                <div class="heading-left">
+                    <h2 class="title">Product List</h2><!-- End .title -->
+                </div><!-- End .heading-left -->
+                <div class="heading-right">
+                    <a href="/products" class="title-link">View All <i class="icon-long-arrow-right"></i></a>
+                </div>
+            </div><!-- End .heading -->
+
+            <div class="products">
+                <div class="row justify-content-center">
+<!--                    list product top-->
+                    <th:block th:each="prot : ${productlistTop}">
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="product product-2">
+                            <figure class="product-media">
+                                <span class="product-label label-sale"><span th:text="${prot.category.name}"></span></span>
+                                <a th:href="@{'/product?pid='+${prot.productnumber}}">
+                                    <img th:src="${prot.photo}"
+                                         th:alt="${prot.name}" class="product-image">
+                                </a>
+
+                                <div class="product-action">
+                                    <a href="#" th:attr="data-product-id=${prot.productnumber},data-seller=${prot.vendor.getUserName()},id='add-cart-link-'+${prot.productnumber}"
+                                       class = "btn-product btn-cart" title="Add to cart"><span>add to
+                                                cart</span></a>
+                                    <a  class="btn-product btn-wishlist"
+                                       title="follow ">follows </a>
+                                </div><!-- End .product-action -->
+                            </figure><!-- End .product-media -->
+
+                            <div class="product-body">
+                                <div class="product-cat">
+                                    <a th:href="@{'/products?cat='+${prot.category.id}}"><span th:text="${prot.category.name}"></span></a>
+                                </div><!-- End .product-cat -->
+                                <h3 class="product-title">
+                                    <a th:href="@{'/product?pid='+${prot.productnumber}}"><span th:text="${prot.name} "></span></a>
+                                </h3><!-- End .product-title -->
+                                <div class="product-price">
+                                    $<span th:text="${prot.price} "></span>
+                                </div><!-- End .product-price -->
+                                <div class="ratings-container">
+                                    <span class="ratings-text"><span  ></span> Reviews</span>
+                                </div><!-- End .rating-container -->
+
+
+                            </div><!-- End .product-body -->
+                        </div><!-- End .product -->
+                    </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+                    </th:block>
+<!--                    End list product top-->
+                </div><!-- End .row -->
+            </div><!-- End .products -->
+        </div><!-- End .container -->
+
+        <div class="mb-4"></div><!-- End .mb-4 -->
+
+        <div class="container">
+            <hr class="mb-0">
+        </div><!-- End .container -->
+
+        <div class="icon-boxes-container bg-transparent">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="icon-box icon-box-side">
+                                <span class="icon-box-icon text-dark">
+                                    <i class="icon-rocket"></i>
+                                </span>
+                            <div class="icon-box-content">
+                                <h3 class="icon-box-title">Free Shipping</h3><!-- End .icon-box-title -->
+                                <p>Orders $50 or more</p>
+                            </div><!-- End .icon-box-content -->
+                        </div><!-- End .icon-box -->
+                    </div><!-- End .col-sm-6 col-lg-3 -->
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="icon-box icon-box-side">
+                                <span class="icon-box-icon text-dark">
+                                    <i class="icon-rotate-left"></i>
+                                </span>
+
+                            <div class="icon-box-content">
+                                <h3 class="icon-box-title">Free Returns</h3><!-- End .icon-box-title -->
+                                <p>Within 30 days</p>
+                            </div><!-- End .icon-box-content -->
+                        </div><!-- End .icon-box -->
+                    </div><!-- End .col-sm-6 col-lg-3 -->
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="icon-box icon-box-side">
+                                <span class="icon-box-icon text-dark">
+                                    <i class="icon-info-circle"></i>
+                                </span>
+
+                            <div class="icon-box-content">
+                                <h3 class="icon-box-title">Get 20% Off 1 Item</h3><!-- End .icon-box-title -->
+                                <p>when you sign up</p>
+                            </div><!-- End .icon-box-content -->
+                        </div><!-- End .icon-box -->
+                    </div><!-- End .col-sm-6 col-lg-3 -->
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="icon-box icon-box-side">
+                                <span class="icon-box-icon text-dark">
+                                    <i class="icon-life-ring"></i>
+                                </span>
+
+                            <div class="icon-box-content">
+                                <h3 class="icon-box-title">We Support</h3><!-- End .icon-box-title -->
+                                <p>24/7 amazing services</p>
+                            </div><!-- End .icon-box-content -->
+                        </div><!-- End .icon-box -->
+                    </div><!-- End .col-sm-6 col-lg-3 -->
+                </div><!-- End .row -->
+            </div><!-- End .container -->
+        </div><!-- End .icon-boxes-container -->
+    </main><!-- End .main -->
+</div>
+</body>
+</html>
