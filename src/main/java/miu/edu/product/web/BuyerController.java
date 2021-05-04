@@ -112,10 +112,10 @@ public class BuyerController {
                     detailList = order.getOrderDetailList();
                 } else {
                     order = new OnlineOrder();
-                    order.setStatus(OrderStatus.New);
+                    order.setStatus(OrderStatus.NEW);
                     order.setTax(0.00);
                     order.setShippingFee(shippingFee);
-                    order.setShippingAddress("");
+//                    order.setShippingAddress(" ");
                     order.setTotal(shippingFee);
                     detailList = new ArrayList<>();
                     order.setOrderDetailList(detailList);
