@@ -1,42 +1,25 @@
 package miu.edu.product.domain;
 
-import java.util.Date;
+import lombok.Data;
 
+import javax.persistence.*;
+import java.sql.Timestamp;
+
+@Entity()
+@Data
+@Table(name = "transactions")
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorValue(value = "transactions")
 public class Transaction {
-    private long id;
-    private TrasactionStatus status;
-    private Date date;
-    private double value;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    public long getId() {
-        return id;
-    }
+    @OneToOne(targetEntity = Visa.class, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    private Visa card;
 
-    public void setId(long id) {
-        this.id = id;
-    }
+    @Column(columnDefinition = "DOUBLE DEFAULT 0.00")
+    private double amount;
 
-    public TrasactionStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(TrasactionStatus status) {
-        this.status = status;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public double getValue() {
-        return value;
-    }
-
-    public void setValue(double value) {
-        this.value = value;
-    }
+    private Timestamp createdAt;
 }
