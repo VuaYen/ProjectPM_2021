@@ -32,12 +32,12 @@ public class OnlineOrder extends Subject {
     private Date dateShipping;
 
     private Double tax;
-    private Timestamp dateCreate;
+    private Date dateCreate;
     private Double shippingFee;
     private Double total;
     private String orderno;
-    @Embedded
-    private Address shippingAddress;
+//    @Embedded
+    private String shippingAddress;
     private OrderStatus status;
 
 
