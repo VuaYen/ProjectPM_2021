@@ -18,7 +18,7 @@
         <defaultValueExpression><![CDATA["Sale Report"]]></defaultValueExpression>
     </parameter>
     <parameter name="SubTitle" class="java.lang.String">
-        <defaultValueExpression><![CDATA["A quick report of a PM eCommerce"]]></defaultValueExpression>
+        <defaultValueExpression><![CDATA["Report of Online Shopping"]]></defaultValueExpression>
     </parameter>
     <queryString>
         <![CDATA[]]>
@@ -53,7 +53,7 @@
                 <textElement textAlignment="Right">
                     <font size="12"/>
                 </textElement>
-                <textFieldExpression><![CDATA["Copyright by Great Team"]]></textFieldExpression>
+                <textFieldExpression><![CDATA["Copyright by Group 3"]]></textFieldExpression>
             </textField>
         </band>
     </title>

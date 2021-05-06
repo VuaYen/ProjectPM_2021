@@ -5,8 +5,8 @@
     <property name="com.jaspersoft.studio.data.defaultdataadapter" value="testDB"/>
     <parameter name="caption" class="java.lang.String"/>
     <queryString language="SQL">
-        <![CDATA[SELECT EXTRACT(YEAR_MONTH FROM o.created_date) as month, count(o.id) as total
-FROM orders  o
+        <![CDATA[SELECT EXTRACT(YEAR_MONTH FROM o.dateCreate) as month, count(o.id) as total
+FROM onlineorder o
 GROUP BY month]]>
     </queryString>
     <field name="total" class="java.lang.Integer">

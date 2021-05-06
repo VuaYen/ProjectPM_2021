@@ -6,7 +6,7 @@
     <parameter name="caption" class="java.lang.String"/>
     <queryString language="SQL">
         <![CDATA[select count(*) as total,a.state
-from orders o, addresses a
+from onlineorder o, addresses a
 where o.billing_address_id=a.id
 group by a.state]]>
     </queryString>

@@ -46,7 +46,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
                                                                    @Param("toDate") Timestamp toDate, @Param("vendorId") String vendorId);
 
     @Query(value = "SELECT EXTRACT(YEAR FROM o.deliveryDate), count(distinct p.productnumber), sum(i.qty*i.sellPrice) " +
-            "     FROM scheduled_deliveries  o, scheduled_deliveries_OrderDetail oi, orderdetail i, product p, vendor v  " +
+            "     FROM scheduled_deliveries o, scheduled_deliveries_OrderDetail oi, orderdetail i, product p, vendor v  " +
             "     WHERE o.id=oi.scheduled_deliveries_id and oi.details_id=i.id and i.productId=p.productnumber and p.vendorId=v.id " +
             "           and (:fromDate is null or o.deliveryDate>=:fromDate) " +
             "           and (:toDate is null or o.deliveryDate<=:toDate) " +
@@ -57,7 +57,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
                                                                     @Param("toDate") Timestamp toDate, @Param("vendorId") String vendorId);
 
     @Query(value = "SELECT DATE_FORMAT(o.deliveryDate, '%Y %b') as month, count(distinct p.productnumber), sum(i.qty*i.sellPrice) " +
-            "    FROM scheduled_deliveries  o, scheduled_deliveries_OrderDetail oi, orderdetail i, product p, vendor v " +
+            "    FROM scheduled_deliveries o, scheduled_deliveries_OrderDetail oi, orderdetail i, product p, vendor v " +
             "    WHERE o.id=oi.scheduled_deliveries_id and oi.details_id=i.id and i.productId=p.productnumber and p.vendorId=v.id " +
             "           and (:fromDate is null or o.deliveryDate>=:fromDate) " +
             "           and (:toDate is null or o.deliveryDate<=:toDate) " +
@@ -68,7 +68,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
                                                                          @Param("toDate") Timestamp toDate, @Param("vendorId") String vendorId);
 
     @Query(value = "SELECT DATE_FORMAT(o.deliveryDate, '%Y %b %e') as week , count(distinct p.productnumber), sum(i.qty*i.sellPrice) " +
-            "    FROM scheduled_deliveries  o, scheduled_deliveries_OrderDetail oi, orderdetail i, product p, vendor v " +
+            "    FROM scheduled_deliveries o, scheduled_deliveries_OrderDetail oi, orderdetail i, product p, vendor v " +
             "    WHERE o.id=oi.scheduled_deliveries_id and oi.details_id=i.id and i.productId=p.productnumber and p.vendorId=v.id " +
             "           and (:fromDate is null or o.deliveryDate>=:fromDate) " +
             "           and (:toDate is null or o.deliveryDate<=:toDate) " +
@@ -79,7 +79,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
                                                                     @Param("toDate") Timestamp toDate, @Param("vendorId") String vendorId);
 
     @Query(value = "SELECT EXTRACT(DAY FROM o.deliveryDate), count(distinct p.productnumber), sum(i.qty*i.sellPrice) " +
-            "    FROM scheduled_deliveries  o, scheduled_deliveries_OrderDetail oi, orderdetail i, product p, vendor v " +
+            "    FROM scheduled_deliveries o, scheduled_deliveries_OrderDetail oi, orderdetail i, product p, vendor v " +
             "    WHERE o.id=oi.scheduled_deliveries_id and oi.details_id=i.id and i.productId=p.productnumber and p.vendorId=v.id " +
             "           and (:fromDate is null or o.deliveryDate>=:fromDate) " +
             "           and (:toDate is null or o.deliveryDate<=:toDate) " +

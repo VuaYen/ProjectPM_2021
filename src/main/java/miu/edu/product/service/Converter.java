@@ -88,10 +88,10 @@ public class Converter {
             orderDTO.setOrder_id(order.getId());
             orderDTO.setUser_id((int)order.getCustomer().getId());
 //            orderDTO.setShipping_address_id(order.getBillingAddress());
-//            orderDTO.setShipping_address_id(order.getShippingAddress().toString());
+            orderDTO.setShipping_address_id(order.getShippingAddress());
             orderDTO.setTax(order.getTax());
             orderDTO.setStatus(order.getStatus());
-//            orderDTO.setOrder_date(order.getDateCreate());
+            orderDTO.setOrder_date(new Timestamp(order.getDateCreate().getTime()).toLocalDateTime());
             List<OrderDetail> OrderDetailList = order.getOrderDetailList();
             List<OrderDetailDTO> OrderDetailDTOList = new ArrayList<>();
             for (OrderDetail OrderDetail : OrderDetailList) {
