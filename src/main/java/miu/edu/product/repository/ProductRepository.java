@@ -18,15 +18,15 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> findAllByVendor(Vendor vendor);
 
     @Query(value = "select p.* " +
-            " from scheduled_deliveries o, scheduled_deliveries_items oi, order_items i, products p, vendors v " +
-            " where o.id=oi.scheduled_delivery_id and oi.items_id=i.id and i.product_id=p.id and p.vendor_id=v.id " +
-            "           and (:fromDate is null or o.delivery_date>=:fromDate) " +
-            "           and (:toDate is null or o.delivery_date<=:toDate) " +
+            " from scheduled_deliveries o, scheduled_deliveries_OrderDetail oi, orderdetail i, product p, vendor v " +
+            " where o.id=oi.scheduled_deliveries_id and oi.details_id=i.id and i.productId=p.productnumber and p.vendorId=v.id " +
+            "           and (:fromDate is null or o.deliveryDate>=:fromDate) " +
+            "           and (:toDate is null or o.deliveryDate<=:toDate) " +
             "     and (:vendorId is null or v.id=:vendorId) and o.status <= 3" +
-            " group by p.id " +
+            " group by p.productnumber " +
             " having 1=1 " +
-            " and (:minCost is null or sum(i.quantity*i.rate)>:minCost) " +
-            " and (:maxCost is null or sum(i.quantity*i.rate)<:maxCost) "
+            " and (:minCost is null or sum(i.qty*i.sellPrice)>:minCost) " +
+            " and (:maxCost is null or sum(i.qty*i.sellPrice)<:maxCost) "
             , nativeQuery = true)
     public List<Product> findProductByReportRequest(@Param("fromDate") Timestamp fromDate,
                                                     @Param("toDate") Timestamp toDate,
@@ -34,57 +34,57 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
                                                     @Param("minCost") String minCost,
                                                     @Param("maxCost") String maxCost);
 
-    @Query(value = "SELECT count(distinct o.id), sum(i.quantity*i.rate) " +
-            "     FROM scheduled_deliveries o, scheduled_deliveries_items oi, order_items i, products p, vendors v " +
-            "     WHERE o.id=oi.scheduled_delivery_id and oi.items_id=i.id and i.product_id=p.id and p.vendor_id=v.id " +
-            "           and (:fromDate is null or o.delivery_date>=:fromDate) " +
-            "           and (:toDate is null or o.delivery_date<=:toDate) " +
+    @Query(value = "SELECT count(distinct o.id), sum(i.qty*i.sellPrice) " +
+            "     FROM scheduled_deliveries o, scheduled_deliveries_OrderDetail oi, orderdetail i, product p, vendor v " +
+            "     WHERE o.id=oi.scheduled_deliveries_id and oi.details_id=i.id and i.productId=p.productnumber and p.vendorId=v.id " +
+            "           and (:fromDate is null or o.deliveryDate>=:fromDate) " +
+            "           and (:toDate is null or o.deliveryDate<=:toDate) " +
             "           and (:vendorId is null or v.id=:vendorId) and o.status <= 3" +
-            "     GROUP BY p.id "
+            "     GROUP BY p.productnumber "
             , nativeQuery = true)
     public List<Object[]> findProductByReportRequestWithoutGroupBy(@Param("fromDate") Timestamp fromDate,
                                                                    @Param("toDate") Timestamp toDate, @Param("vendorId") String vendorId);
 
-    @Query(value = "SELECT EXTRACT(YEAR FROM o.delivery_date), count(distinct p.id), sum(i.quantity*i.rate) " +
-            "     FROM scheduled_deliveries  o, scheduled_deliveries_items oi, order_items i, products p, vendors v  " +
-            "     WHERE o.id=oi.scheduled_delivery_id and oi.items_id=i.id and i.product_id=p.id and p.vendor_id=v.id " +
-            "           and (:fromDate is null or o.delivery_date>=:fromDate) " +
-            "           and (:toDate is null or o.delivery_date<=:toDate) " +
+    @Query(value = "SELECT EXTRACT(YEAR FROM o.deliveryDate), count(distinct p.productnumber), sum(i.qty*i.sellPrice) " +
+            "     FROM scheduled_deliveries  o, scheduled_deliveries_OrderDetail oi, orderdetail i, product p, vendor v  " +
+            "     WHERE o.id=oi.scheduled_deliveries_id and oi.details_id=i.id and i.productId=p.productnumber and p.vendorId=v.id " +
+            "           and (:fromDate is null or o.deliveryDate>=:fromDate) " +
+            "           and (:toDate is null or o.deliveryDate<=:toDate) " +
             "           and (:vendorId is null or v.id=:vendorId) and o.status <= 3" +
-            "     GROUP BY EXTRACT(YEAR FROM o.delivery_date)"
+            "     GROUP BY EXTRACT(YEAR FROM o.deliveryDate)"
             , nativeQuery = true)
     public List<Object[]> findProductByReportRequestWithGroupByYear(@Param("fromDate") Timestamp fromDate,
                                                                     @Param("toDate") Timestamp toDate, @Param("vendorId") String vendorId);
 
-    @Query(value = "SELECT DATE_FORMAT(o.delivery_date, '%Y %b') as month, count(distinct p.id), sum(i.quantity*i.rate) " +
-            "    FROM scheduled_deliveries  o, scheduled_deliveries_items oi, order_items i, products p, vendors v " +
-            "    WHERE o.id=oi.scheduled_delivery_id and oi.items_id=i.id and i.product_id=p.id and p.vendor_id=v.id " +
-            "           and (:fromDate is null or o.delivery_date>=:fromDate) " +
-            "           and (:toDate is null or o.delivery_date<=:toDate) " +
+    @Query(value = "SELECT DATE_FORMAT(o.deliveryDate, '%Y %b') as month, count(distinct p.productnumber), sum(i.qty*i.sellPrice) " +
+            "    FROM scheduled_deliveries  o, scheduled_deliveries_OrderDetail oi, orderdetail i, product p, vendor v " +
+            "    WHERE o.id=oi.scheduled_deliveries_id and oi.details_id=i.id and i.productId=p.productnumber and p.vendorId=v.id " +
+            "           and (:fromDate is null or o.deliveryDate>=:fromDate) " +
+            "           and (:toDate is null or o.deliveryDate<=:toDate) " +
             "           and (:vendorId is null or v.id=:vendorId) and o.status <= 3" +
             "    GROUP BY month "
             , nativeQuery = true)
     public List<Object[]> findProductByReportRequestWithGroupByYearMonth(@Param("fromDate") Timestamp fromDate,
                                                                          @Param("toDate") Timestamp toDate, @Param("vendorId") String vendorId);
 
-    @Query(value = "SELECT DATE_FORMAT(o.delivery_date, '%Y %b %e') as week , count(distinct p.id), sum(i.quantity*i.rate) " +
-            "    FROM scheduled_deliveries  o, scheduled_deliveries_items oi, order_items i, products p, vendors v " +
-            "    WHERE o.id=oi.scheduled_delivery_id and oi.items_id=i.id and i.product_id=p.id and p.vendor_id=v.id " +
-            "           and (:fromDate is null or o.delivery_date>=:fromDate) " +
-            "           and (:toDate is null or o.delivery_date<=:toDate) " +
+    @Query(value = "SELECT DATE_FORMAT(o.deliveryDate, '%Y %b %e') as week , count(distinct p.productnumber), sum(i.qty*i.sellPrice) " +
+            "    FROM scheduled_deliveries  o, scheduled_deliveries_OrderDetail oi, orderdetail i, product p, vendor v " +
+            "    WHERE o.id=oi.scheduled_deliveries_id and oi.details_id=i.id and i.productId=p.productnumber and p.vendorId=v.id " +
+            "           and (:fromDate is null or o.deliveryDate>=:fromDate) " +
+            "           and (:toDate is null or o.deliveryDate<=:toDate) " +
             "           and (:vendorId is null or v.id=:vendorId) and o.status <= 3" +
             "    GROUP BY week "
             , nativeQuery = true)
     public List<Object[]> findProductByReportRequestWithGroupByWeek(@Param("fromDate") Timestamp fromDate,
                                                                     @Param("toDate") Timestamp toDate, @Param("vendorId") String vendorId);
 
-    @Query(value = "SELECT EXTRACT(DAY FROM o.delivery_date), count(distinct p.id), sum(i.quantity*i.rate) " +
-            "    FROM scheduled_deliveries  o, scheduled_deliveries_items oi, order_items i, products p, vendors v " +
-            "    WHERE o.id=oi.scheduled_delivery_id and oi.items_id=i.id and i.product_id=p.id and p.vendor_id=v.id " +
-            "           and (:fromDate is null or o.delivery_date>=:fromDate) " +
-            "           and (:toDate is null or o.delivery_date<=:toDate) " +
+    @Query(value = "SELECT EXTRACT(DAY FROM o.deliveryDate), count(distinct p.productnumber), sum(i.qty*i.sellPrice) " +
+            "    FROM scheduled_deliveries  o, scheduled_deliveries_OrderDetail oi, orderdetail i, product p, vendor v " +
+            "    WHERE o.id=oi.scheduled_deliveries_id and oi.details_id=i.id and i.productId=p.productnumber and p.vendorId=v.id " +
+            "           and (:fromDate is null or o.deliveryDate>=:fromDate) " +
+            "           and (:toDate is null or o.deliveryDate<=:toDate) " +
             "           and (:vendorId is null or v.id=:vendorId) and o.status <= 3" +
-            "    GROUP BY EXTRACT(DAY FROM o.delivery_date)"
+            "    GROUP BY EXTRACT(DAY FROM o.deliveryDate)"
             , nativeQuery = true)
     public List<Object[]> findProductByReportRequestWithGroupByDay(@Param("fromDate") Timestamp fromDate,
                                                                    @Param("toDate") Timestamp toDate, @Param("vendorId") String vendorId);
