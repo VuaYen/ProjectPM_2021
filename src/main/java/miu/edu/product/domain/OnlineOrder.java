@@ -49,8 +49,8 @@ public class OnlineOrder extends Subject {
     private String sStatus;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "orderId")
     private List<OrderDetail> orderDetailList;
+
     @OneToOne
     private User customer;
 
