@@ -1,13 +1,12 @@
 package miu.edu.product.web;
 
 
-import miu.edu.product.domain.OnlineOrder;
-import miu.edu.product.domain.OrderDetail;
-import miu.edu.product.domain.OrderStatus;
-import miu.edu.product.domain.Product;
+import miu.edu.product.domain.*;
 import miu.edu.product.dto.Cart;
 import miu.edu.product.dto.CheckOutModel;
 import miu.edu.product.dto.RemoveCartModel;
+import miu.edu.product.exception.OrderCreateException;
+import miu.edu.product.service.OrderService;
 import miu.edu.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,6 +24,7 @@ public class BuyerController {
 
     private final ServletContext context;
     private final ProductService productService;
+    private final OrderService orderService;
 
 
 
@@ -35,9 +35,10 @@ public class BuyerController {
     private Double shippingFee;
 
     @Autowired
-    public BuyerController(ServletContext context, ProductService productService) {
+    public BuyerController(ServletContext context, ProductService productService,OrderService orderService) {
         this.context = context;
         this.productService = productService;
+        this.orderService = orderService;
 
     }
 
@@ -51,14 +52,51 @@ public class BuyerController {
         return "buyer/404";
     }
 
-    @GetMapping("/check-out/{seller}")
-    public String showCheckout(@PathVariable(name = "seller") String seller, HttpServletRequest request, Model model) {
+    @GetMapping("/check-out")
+    public String showCheckout( HttpServletRequest request, Model model) throws OrderCreateException {
 
+        Cart cart = (Cart) model.asMap().get("myCart");
+        OnlineOrder order = new OnlineOrder();
 
         CheckOutModel checkOutModel = new CheckOutModel();
+        User customer =new User();
+        Address address= new Address();
+        address.setCity("Fairfield");
+        address.setState("IA");
+        address.setStreet("1000 4th");
+        address.setZip("52557");
+
+        customer.setAddress(address);
+        customer.setEmail("yen637@gmail.com");
+        customer.setUserName("thepham");
+
+        checkOutModel.setCustomer(customer);
+        checkOutModel.setOrder(order);
+
+        orderService.placeOrder(order);
+        System.out.println(order.getOrderno());
 
         model.addAttribute("model", checkOutModel);
         return "buyer/checkout";
+    }
+
+    @PostMapping("/check-out")
+    public String proceedCheckout(@ModelAttribute("checkOutModel") CheckOutModel checkOutModel, Model model, HttpServletRequest request) throws OrderCreateException {
+        Cart cart = (Cart) model.asMap().get("myCart");
+        OnlineOrder order = checkOutModel.getOrder();
+        if (checkOutModel.getOrder().getShippingAddress() != null && !checkOutModel.getOrder().getShippingAddress().trim().equals("")) {
+            order.setShippingAddress(checkOutModel.getOrder().getShippingAddress());
+        }
+        orderService.placeOrder(order);
+        System.out.println("order.getOrderno()");
+
+        Integer orderItemTotal = 0;
+        for (OrderDetail detail : order.getOrderDetailList()) {
+            orderItemTotal += detail.getQty();
+        }
+        cart.setTotal(cart.getTotal() - orderItemTotal);
+
+        return "buyer/home";
     }
 
     @GetMapping("/login")
@@ -74,7 +112,6 @@ public class BuyerController {
     @GetMapping("/add-to-cart/{productId}/{qty}")
     public @ResponseBody
     Integer addToCart(@PathVariable(name = "productId") Integer productId, @PathVariable(name = "qty") Integer quantity, Model model, @ModelAttribute(name = "myCart") Cart cart) {
-        //Cart cart = (Cart) model.asMap().get("myCart");
         HashMap<String, OnlineOrder> orders = cart.getOrderList();
 
         OnlineOrder order = null;
@@ -115,11 +152,10 @@ public class BuyerController {
                     order.setStatus(OrderStatus.NEW);
                     order.setTax(0.00);
                     order.setShippingFee(shippingFee);
-//                    order.setShippingAddress(" ");
+                    order.setShippingAddress("order.getCustomer().getAddress()");
                     order.setTotal(shippingFee);
                     detailList = new ArrayList<>();
                     order.setOrderDetailList(detailList);
-//                    order.setCustomer(product.getVendor().getUserName());
                 }
 
                 orderDetail = new OrderDetail();
@@ -246,6 +282,5 @@ public class BuyerController {
         RemoveCartModel removeCartModel = new RemoveCartModel(cartItemTotal, 0, product.getProductnumber(), order);
         return removeCartModel;
     }
-
 
 }
