@@ -5,10 +5,9 @@
     <property name="com.jaspersoft.studio.data.defaultdataadapter" value="testDB"/>
     <parameter name="caption" class="java.lang.String"/>
     <queryString language="SQL">
-        <![CDATA[select count(*) as total,a.state
-from orders o, addresses a
-where o.shipping_address_id=a.id
-group by a.state]]>
+        <![CDATA[select count(*) as total,v.state
+from onlineorder o, vendor v
+group by v.state]]>
     </queryString>
     <field name="total" class="java.lang.Integer">
         <property name="com.jaspersoft.studio.field.name" value="total"/>
@@ -17,7 +16,7 @@ group by a.state]]>
     <field name="state" class="java.lang.String">
         <property name="com.jaspersoft.studio.field.name" value="state"/>
         <property name="com.jaspersoft.studio.field.label" value="state"/>
-        <property name="com.jaspersoft.studio.field.tree.path" value="addresses"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="vendor"/>
         <fieldDescription><![CDATA[]]></fieldDescription>
     </field>
     <group name="state">

@@ -11,8 +11,8 @@ import java.util.List;
 public class OrderDTO {
     private int order_id;
     private int user_id;
-    private Address billing_address_id;
-    private Address shipping_address_id;
+    private String billing_address_id;
+    private String shipping_address_id;
     private double tax;
     private OrderStatus status;
     private LocalDateTime order_date;
