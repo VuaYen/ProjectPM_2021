@@ -44,7 +44,7 @@ public interface CategoryRepository extends JpaRepository<Category,Integer> {
 
     @Query(value="SELECT EXTRACT(YEAR FROM o.deliveryDate), count(distinct c.id), sum(i.qty*i.sellPrice) " +
             "     FROM scheduled_deliveries  o, scheduled_deliveries_OrderDetail oi, orderdetail i, product p, vendor v, category c   " +
-            "     WHERE o.id=oi.scheduled_deliveries_id and oi.detials_id=i.id and i.productId=p.productnumber and o.vendor_id=v.id and p.categoryId=c.id  " +
+            "     WHERE o.id=oi.scheduled_deliveries_id and oi.orderDetailList_id=i.id and i.productId=p.productnumber and o.vendor_id=v.id and p.categoryId=c.id  " +
             "           and (:fromDate is null or o.deliveryDate>=:fromDate) " +
             "           and (:toDate is null or o.deliveryDate<=:toDate) " +
             "           and (:vendorId is null or v.id=:vendorId) and o.status <= 3" +
@@ -55,7 +55,7 @@ public interface CategoryRepository extends JpaRepository<Category,Integer> {
 
     @Query(value="SELECT DATE_FORMAT(o.deliveryDate, '%Y %b') as month, count(distinct c.id), sum(i.qty*i.sellPrice) " +
             "    FROM scheduled_deliveries  o, scheduled_deliveries_OrderDetail oi, orderdetail i, product p, vendor v, category c  " +
-            "    WHERE o.id=oi.scheduled_deliveries_id and oi.detials_id=i.id and i.productId=p.productnumber and o.vendor_id=v.id and p.categoryId=c.id  " +
+            "    WHERE o.id=oi.scheduled_deliveries_id and oi.orderDetailList_id=i.id and i.productId=p.productnumber and o.vendor_id=v.id and p.categoryId=c.id  " +
             "           and (:fromDate is null or o.deliveryDate>=:fromDate) " +
             "           and (:toDate is null or o.deliveryDate<=:toDate) " +
             "           and (:vendorId is null or v.id=:vendorId) and o.status <= 3" +
@@ -66,7 +66,7 @@ public interface CategoryRepository extends JpaRepository<Category,Integer> {
 
     @Query(value="SELECT DATE_FORMAT(o.deliveryDate, '%Y %b %e') as week, count(distinct c.id), sum(i.qty*i.sellPrice) " +
             "    FROM scheduled_deliveries  o, scheduled_deliveries_OrderDetail oi, orderdetail i, product p, vendor v, category c  " +
-            "    WHERE o.id=oi.scheduled_deliveries_id and oi.detials_id=i.id and i.productId=p.productnumber and p.vendorId=v.id and p.categoryId=c.id  " +
+            "    WHERE o.id=oi.scheduled_deliveries_id and oi.orderDetailList_id=i.id and i.productId=p.productnumber and p.vendorId=v.id and p.categoryId=c.id  " +
             "           and (:fromDate is null or o.deliveryDate>=:fromDate) " +
             "           and (:toDate is null or o.deliveryDate<=:toDate) " +
             "           and (:vendorId is null or v.id=:vendorId) and o.status <= 3" +
@@ -77,7 +77,7 @@ public interface CategoryRepository extends JpaRepository<Category,Integer> {
 
     @Query(value="SELECT EXTRACT(DAY FROM o.deliveryDate), count(distinct c.id), sum(i.qty*i.sellPrice) " +
             "    FROM scheduled_deliveries  o, scheduled_deliveries_OrderDetail oi, orderdetail i, product p, vendor v, category c  " +
-            "    WHERE o.id=oi.scheduled_deliveries_id and oi.detials_id=i.id and i.productId=p.productnumber and p.vendorId=v.id and p.categoryId=c.id  " +
+            "    WHERE o.id=oi.scheduled_deliveries_id and oi.orderDetailList_id=i.id and i.productId=p.productnumber and p.vendorId=v.id and p.categoryId=c.id  " +
             "           and (:fromDate is null or o.deliveryDate>=:fromDate) " +
             "           and (:toDate is null or o.deliveryDate<=:toDate) " +
             "           and (:vendorId is null or v.id=:vendorId) and o.status <= 3" +

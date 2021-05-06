@@ -6,7 +6,7 @@
     <parameter name="caption" class="java.lang.String"/>
     <queryString language="SQL">
         <![CDATA[SELECT count(distinct o.id) total, p.name
-           FROM orders  o, orders_items oi, orderdetail i, product p
+           FROM orders  o, OnlineOrder_OrderDetail oi, orderdetail i, product p
             WHERE o.id=oi.order_id and oi.details_id=i.id and i.productId=p.productnumber
 GROUP BY p.id
 ORDER BY count(distinct o.id) DESC
