@@ -1,22 +1,25 @@
 package miu.edu.product.web;
 
 
-import miu.edu.product.domain.OnlineOrder;
-import miu.edu.product.domain.OrderDetail;
-import miu.edu.product.domain.OrderStatus;
-import miu.edu.product.domain.Product;
+import miu.edu.product.domain.*;
 import miu.edu.product.dto.Cart;
 import miu.edu.product.dto.CheckOutModel;
 import miu.edu.product.dto.RemoveCartModel;
+import miu.edu.product.service.PaymentService;
 import miu.edu.product.service.ProductService;
+import miu.edu.product.service.dto.pdf.OrderStateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.*;
 
 @Controller
@@ -26,6 +29,10 @@ public class BuyerController {
     private final ServletContext context;
     private final ProductService productService;
 
+
+
+    @Autowired
+    PaymentService paymentService;
 
 
     @Value("0.08")
@@ -65,7 +72,6 @@ public class BuyerController {
     public String showLoginForm(HttpServletRequest httpServletRequest) {
         return "/buyer/login";
     }
-
     @GetMapping("/shopping-cart")
     public String showCart(Model model) {
         return "/buyer/shopping-cart";
@@ -247,5 +253,81 @@ public class BuyerController {
         return removeCartModel;
     }
 
+    @GetMapping("/payment")
+    public String paymentForm(Model model) {
+        model.addAttribute("payment", new Visa());
+        return "/buyer/paymentForm";
+    }
+    @PostMapping("/payment")
+    public String savePayment(@Valid @ModelAttribute("payment") Visa payment, @Valid @ModelAttribute("address") Address address,BindingResult result, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            return "/buyer/paymentForm";
+        } else {
+//            Address billingAddress = (Address) session.getAttribute("billingAddress");
+//            Address shippingAddress = (Address) session.getAttribute("shippingAddress");
+//
+//
+//            if(billingAddress ==null || shippingAddress == null){
+//                return "redirect:/";
+//            }
+//
+//            billingAddress = billingAddressService.save(billingAddress);
+//            shippingAddress = shippingAddressService.save(shippingAddress);
+//
+//            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//            User user = userService.findByUserName(authentication.getName());
+//
+//            ProductOrder productOrder = new ProductOrder();
+//            productOrder.setTransactionId(MyHelper.getRandomInt());
+//            productOrder.setBillingAddress(billingAddress);
+//            productOrder.setShippingAddress(shippingAddress);
+//            productOrder.setOrderStatus(OrderStatusEnum.PENDING);
+//            productOrder.setBuyer(user);
+//
+//
+//            //message is remaining
+//
+//            Long points = 5l;
+//
+//            //collecting product
+//            List<OrderedProduct> orderedProducts = new ArrayList<OrderedProduct>();
+//            List<Long> ids = new ArrayList<Long>();
+//            Map<Long,Product> products = (HashMap<Long,Product>)session.getAttribute("cart_item");
+//            for(Map.Entry<Long, Product> entry : products.entrySet()) {
+//                Long key = entry.getKey();
+//                Product p = entry.getValue();
+//                OrderedProduct orderedProduct = new OrderedProduct();
+//                orderedProduct.setPrice(p.getPrice());
+//                orderedProduct.setQty(p.getQty());
+//                orderedProduct.setTax(p.getTax());
+//                orderedProduct.setProduct(p);
+//                orderedProducts.add(orderedProduct);
+//                ids.add(p.getId());
+//            }
+//
+//            productOrder.setOrderedProducts(orderedProducts);
+//            productOrderService.save(productOrder);
 
+            paymentService.save(payment);
+            redirectAttributes.addFlashAttribute(payment);
+            return "redirect:/ShipmentAddress";
+        }
+
+    }
+    @GetMapping(value = {"/ShipmentAddress"})
+    public String ShipmentAddress(@ModelAttribute("address") Address address, Model model){
+
+        return  "/buyer/shippingForm";
+    }
+    @PostMapping(value = {"ShipmentAddressForm"})
+    public String saveShippmentAddress(@ModelAttribute("address") Address address, Model model){
+        Address address1 = address;
+
+        return  "redirect:/paymentSuccess";
+    }
+    @GetMapping("/paymentSuccess")
+    public String paymentSuccess(Model model) {
+
+        return "/buyer/paymentSuccess";
+    }
 }

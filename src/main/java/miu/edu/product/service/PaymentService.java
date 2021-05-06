@@ -1,16 +1,16 @@
 package miu.edu.product.service;
-import miu.edu.product.domain.Payment;
+
+
+import miu.edu.product.domain.Visa;
+
 import java.util.List;
 
 public interface PaymentService {
 
-    Payment save(Payment payment);
+    public Visa save(Visa payment);
+    public List<Visa> getAllPayment();
 
-    List<Payment> findAll();
+    public Visa findById(long id);
 
-    List<Payment> getAllByUserName(String username);
-
-    Payment findById(Long id);
-
-    Payment updatePayment(Payment payment);
+    public void delete(Visa Payment);
 }

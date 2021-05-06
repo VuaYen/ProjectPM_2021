@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/user/ulayout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Shippment Address Method</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="user-main-content">
+        <form action="@{/ShipmentAddressForm}" th:object="${address}" method="post">
+            <h2>Shipping Address</h2>
+            <div>
+                <label for="street">street</label>
+                <input th:field="*{street}" id="street" placeholder="street ">
+                <p th:errors="*{street}"></p>
+            </div>
+            <div>
+                <label for="city">city</label>
+                <input th:field="*{city}" id="city" placeholder="city ">
+                <p th:errors="*{city}"></p>
+            </div>
+            <div>
+                <label for="city">state</label>
+                <input th:field="*{state}" id="state" placeholder="state ">
+                <p th:errors="*{state}"></p>
+            </div>
+            <div>
+                <label for="zip">zip</label>
+                <input th:field="*{zip}" id="zip" placeholder="zip ">
+                <p th:errors="*{zip}"></p>
+            </div>
+            <div>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,39 +1,36 @@
 package miu.edu.product.service.impl;
 
-import miu.edu.product.domain.Payment;
+import miu.edu.product.domain.Visa;
+import miu.edu.product.repository.PaymentRepository;
 import miu.edu.product.service.PaymentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+
 
 @Service
 @Transactional
 public class PaymentServiceImpl implements PaymentService {
 
-    @Override
-    public Payment save(Payment payment) {
+    @Autowired
+    PaymentRepository paymentRepository;
 
-        return null;
+    @Transactional
+    public Visa save(Visa payment){
+        return paymentRepository.save(payment);
+    }
+    @Transactional
+    public List<Visa> getAllPayment(){
+        return paymentRepository.findAll();
     }
 
-    @Override
-    public List<Payment> findAll() {
-        return null;
+    @Transactional
+    public Visa findById(long id) {
+        return paymentRepository.findById(id);
     }
-
-    @Override
-    public List<Payment> getAllByUserName(String username) {
-        return null;
-    }
-
-    @Override
-    public Payment findById(Long id) {
-        return null;
-    }
-
-    @Override
-    public Payment updatePayment(Payment payment) {
-        return null;
+    @Transactional
+    public void delete(Visa Payment) {
+        paymentRepository.delete(Payment);
     }
 }
