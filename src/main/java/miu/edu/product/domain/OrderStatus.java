@@ -1,9 +1,11 @@
 package miu.edu.product.domain;
 
 public enum OrderStatus {
-    New,
-    Shipped,
-    OnTheWay,
-    Delivered,
-    Cancel
+    NEW,
+    RECEIVED,
+    SHIPPED,
+    ON_THE_WAY,
+    DELIVERED,
+    CANCELLED,
+    DELETED
 }

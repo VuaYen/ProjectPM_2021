@@ -37,6 +37,8 @@ public class Vendor {
 	@Column(unique = true)
 	private String userName;
 
+	private VendorStatus status;
+
 	@Embedded
 	private Address address;
 
