@@ -38,6 +38,8 @@ public class OnlineOrder extends Subject {
     private String orderno;
 //    @Embedded
     private String shippingAddress;
+    private String billingAddress;
+    private Address deliveryAddress;
     private OrderStatus status;
 
 
@@ -47,6 +49,9 @@ public class OnlineOrder extends Subject {
 
     @Transient
     private String sStatus;
+
+    @OneToMany(targetEntity = Transaction.class, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    private List<Transaction> transactions;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<OrderDetail> orderDetailList;

@@ -1,10 +1,10 @@
 package miu.edu.product.service;
 
 import miu.edu.product.domain.*;
-import miu.edu.product.service.dto.OrderDTO;
-import miu.edu.product.service.dto.OrderDetailDTO;
-import miu.edu.product.service.dto.ReportRequestDTO;
-import miu.edu.product.service.dto.ScheduledDeliveryDTO;
+import miu.edu.product.dto.OrderDTO;
+import miu.edu.product.dto.OrderDetailDTO;
+import miu.edu.product.dto.ReportRequestDTO;
+import miu.edu.product.dto.ScheduledDeliveryDTO;
 import miu.edu.product.service.enums.ReportRequestEnum;
 
 import javax.servlet.http.HttpServletRequest;
@@ -87,8 +87,8 @@ public class Converter {
         if (order != null) {
             orderDTO.setOrder_id(order.getId());
             orderDTO.setUser_id((int)order.getCustomer().getId());
-//            orderDTO.setShipping_address_id(order.getBillingAddress());
-            orderDTO.setShipping_address_id(order.getShippingAddress());
+            orderDTO.setBilling_address(order.getBillingAddress());
+            orderDTO.setShipping_address(order.getDeliveryAddress());
             orderDTO.setTax(order.getTax());
             orderDTO.setStatus(order.getStatus());
             orderDTO.setOrder_date(new Timestamp(order.getDateCreate().getTime()).toLocalDateTime());

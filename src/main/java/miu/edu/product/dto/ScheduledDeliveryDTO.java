@@ -1,4 +1,4 @@
-package miu.edu.product.service.dto;
+package miu.edu.product.dto;
 
 import lombok.Data;
 import miu.edu.product.domain.Address;

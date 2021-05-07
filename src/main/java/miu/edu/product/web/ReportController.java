@@ -2,8 +2,8 @@ package miu.edu.product.web;
 
 import miu.edu.product.domain.ApiResponse;
 import miu.edu.product.service.Converter;
-import miu.edu.product.service.dto.ReportRequestDTO;
-import miu.edu.product.service.dto.ReportResponseDTO;
+import miu.edu.product.dto.ReportRequestDTO;
+import miu.edu.product.dto.ReportResponseDTO;
 import miu.edu.product.service.ReportService;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -36,9 +36,11 @@ public class ReportController {
         ApiResponse<ReportResponseDTO> response = new ApiResponse<>();
         try {
             //setup parameters
+            System.out.println("httpServletRequest " + httpServletRequest.toString());
             ReportRequestDTO reportRequestDTO = Converter.convert(httpServletRequest);
+            System.out.println("ReportRequestDTO " + reportRequestDTO);
             //generate sale report
-            ReportResponseDTO reportResponseDTO = reportService.generateReport((reportRequestDTO));
+            ReportResponseDTO reportResponseDTO = reportService.generateReport(reportRequestDTO);
 
             response.setData(reportResponseDTO);
             response.setMessage("Successfully");
