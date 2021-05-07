@@ -51,10 +51,33 @@ public class Product {
 
 	private Integer quantity;
 
-	public Product(Integer productnumber,Double price,String description,Vendor vendor) {
-		this.productnumber= productnumber;
+	public Product(String name,String description,Double price,String photo,Category category,Vendor vendor) {
+		this.name = name;
+		this.photo =photo;
 		this.price = price;
+		this.createdDate = new Date();
 		this.description =description;
+		this.category = category;
 		this.vendor = vendor;
+		this.quantity =0;
+		this.status = ProductStatus.New;
+		this.image = null;
+	}
+
+	@Override
+	public String toString() {
+		return "Product{" +
+				"productnumber=" + productnumber +
+				", name='" + name + '\'' +
+				", description='" + description + '\'' +
+				", price=" + price +
+				", photo='" + photo + '\'' +
+				", createdDate=" + createdDate +
+				", status=" + status +
+				", image=" + image +
+				", category=" + category +
+				", vendor=" + vendor +
+				", quantity=" + quantity +
+				'}';
 	}
 }

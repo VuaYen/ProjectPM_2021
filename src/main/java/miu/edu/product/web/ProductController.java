@@ -42,16 +42,19 @@ public class ProductController {
 		return productService.getById(productnumber).get();
 	}
 
-	@PostMapping(value = "/api/product/{productnumber}/{price}/{description}/{vendor}")
-	public ResponseEntity<?> addProduct(@PathVariable Integer productnumber, @PathVariable double price
-			,@PathVariable String description,@PathVariable Vendor vendor) {
-		productCatalogService.addProduct(productnumber, description,price,vendor );
-		return new ResponseEntity<Product>(HttpStatus.OK);
+	@PostMapping(value = "/api/product/{name}/{description}/{price}/{photo}/{catid}/{venid}")
+	public Product addProduct(@PathVariable String name,@PathVariable String description, @PathVariable double price
+			,@PathVariable String photo,@PathVariable Integer catid,@PathVariable Integer venid) {
+		Product product= productCatalogService.addProduct(name, description,price,photo,catid,venid );
+		System.out.println(product);
+//		return new ResponseEntity<Product>(HttpStatus.OK);
+		return product;
 	}
 	@GetMapping("/api/vendors")
 	public List<Vendor> getVendors(){
 		return (List<Vendor>)vendorRepository.findAll();
 	}
+
 	@PostMapping("/api/vendors")
 	void addVendor(@RequestBody Vendor vendor){
 		vendorRepository.save(vendor);

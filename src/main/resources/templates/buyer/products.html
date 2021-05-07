@@ -31,7 +31,7 @@
                                     <div class="product-action">
                                         <a href="#" th:attr="data-product-id=${prot.productnumber},data-seller=${prot.vendor.getUserName()},id='add-cart-link-'+${prot.productnumber}"
                                            class="btn-product btn-cart"><span>add to cart</span></a>
-                                        <a th:href="@{'/follows?type='+${typep}+'&user='+${prot.vendor.getUserName()}}" class="btn-product btn-wishlist"><span th:text="${follow}" >follow </span></a>
+                                        <a href="#" class="btn-product btn-wishlist"><span th:text="${follow}" >follow </span></a>
                                     </div><!-- End .product-action -->
                                 </figure><!-- End .product-media -->
 
