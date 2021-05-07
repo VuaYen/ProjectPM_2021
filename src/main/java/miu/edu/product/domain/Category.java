@@ -26,10 +26,9 @@ public class Category {
     @NotNull
     @Column(nullable = false)
     private String name;
-
     private String imageUrl;
 
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
-    private List<Product> products;
+//    @JsonIgnore
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+//    private List<Product> products;
 }

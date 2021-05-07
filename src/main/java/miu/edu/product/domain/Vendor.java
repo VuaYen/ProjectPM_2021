@@ -40,9 +40,9 @@ public class Vendor {
 	@Embedded
 	private Address address;
 
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "vendor")
-	private List<Product> products;
+//	@JsonIgnore
+//	@OneToMany(cascade = CascadeType.ALL, mappedBy = "vendor")
+//	private List<Product> products;
 
 
 }
