@@ -1,4 +1,4 @@
-package miu.edu.product.service.dto;
+package miu.edu.product.dto;
 
 import lombok.Data;
 import miu.edu.product.domain.Address;
@@ -8,13 +8,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-public class OrderDTO {
+public class ScheduledDeliveryDTO {
     private int order_id;
     private int user_id;
-    private Address billing_address_id;
-    private Address shipping_address_id;
+    private Address shipping_address;
     private double tax;
     private OrderStatus status;
-    private LocalDateTime order_date;
+    private LocalDateTime delivery_date;
     private List<OrderDetailDTO> order_detail_list;
 }

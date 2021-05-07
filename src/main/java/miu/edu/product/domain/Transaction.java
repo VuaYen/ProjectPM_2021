@@ -15,8 +15,8 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne(targetEntity = Visa.class, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    private Visa card;
+    @OneToOne(targetEntity = Card.class, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    private Card card;
 
     @Column(columnDefinition = "DOUBLE DEFAULT 0.00")
     private double amount;

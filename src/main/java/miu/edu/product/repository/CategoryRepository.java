@@ -18,8 +18,8 @@ public interface CategoryRepository extends JpaRepository<Category,Integer> {
     @Query(value="select c.* " +
             " from scheduled_deliveries o, scheduled_deliveries_orderdetail od, orderdetail i, product p, vendor v, category c " +
             " where o.id=od.scheduled_deliveries_id and od.detials_id=i.id and i.productId=p.productnumber and p.vendorId=v.id and p.categoryId=c.id " +
-            "     and (:fromDate is null or o.created_date>:fromDate) " +
-            "     and (:toDate is null or o.created_date<:toDate) " +
+            "     and (:fromDate is null or o.deliveredDate>:fromDate) " +
+            "     and (:toDate is null or o.deliveredDate<:toDate) " +
             "     and (:vendorId is null or v.id=:vendorId) and" +
             " group by c.id and o.status <= 3" +
             " having 1=1 " +
