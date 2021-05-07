@@ -1,4 +1,4 @@
-package miu.edu.product.service.dto.pdf;
+package miu.edu.product.dto.pdf;
 
 import lombok.Data;
 

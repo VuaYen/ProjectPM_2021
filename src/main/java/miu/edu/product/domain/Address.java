@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
 
 
 @Setter
@@ -11,6 +12,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Address {
 	private String street;
+//	@JoinColumn(name="city",referencedColumnName="city", insertable = false, updatable = false)
 	private String city;
 	private String state;
 	private String zip;

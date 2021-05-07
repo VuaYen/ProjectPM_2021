@@ -1,7 +1,7 @@
 package miu.edu.product.service;
 
-import miu.edu.product.service.dto.ReportRequestDTO;
-import miu.edu.product.service.dto.ReportResponseDTO;
+import miu.edu.product.dto.ReportRequestDTO;
+import miu.edu.product.dto.ReportResponseDTO;
 
 public interface IReportService {
     ReportResponseDTO generateOrderReport(ReportRequestDTO reportRequestDTO);

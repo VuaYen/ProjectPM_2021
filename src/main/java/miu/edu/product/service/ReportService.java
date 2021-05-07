@@ -3,11 +3,10 @@ package miu.edu.product.service;
 import miu.edu.product.domain.OrderDetail;
 import miu.edu.product.domain.ScheduledDelivery;
 import miu.edu.product.domain.Vendor;
+import miu.edu.product.dto.*;
 import miu.edu.product.repository.*;
-import miu.edu.product.service.dto.*;
-import miu.edu.product.service.dto.pdf.*;
-import miu.edu.product.service.enums.ReportRequestEnum;
-import miu.edu.product.service.enums.ReportResponseEnum;
+import miu.edu.product.dto.pdf.*;
+import miu.edu.product.service.enums.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
@@ -340,7 +339,7 @@ public class ReportService implements IReportService{
             parameters.put("Today", new Date());
             parameters.put("Title", "Sale Report");
             parameters.put("SubTitle", "Report of Online Shopping");
-            InputStream imgInputStream = resourceLoader.getResource("classpath:static/report.png").getInputStream();
+            InputStream imgInputStream = resourceLoader.getResource("classpath:static/sales-report.png").getInputStream();
             parameters.put("Logo", imgInputStream);
             return JasperFillManager.fillReport(jasperReport, parameters, jrBeanCollectionDataSource);
         } catch (Exception e) {

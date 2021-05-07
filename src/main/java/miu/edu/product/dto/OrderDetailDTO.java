@@ -1,13 +1,17 @@
 package miu.edu.product.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class OrderDetailDTO {
-    private  String productname;
-    private  String quantity;
-    private  String price;
-    private  String total;
+    private int order_item_id;
+    private int order_id;
+    private int product_id;
+    private String product_name;
+    private int category_id;
+    private String category_name;
+    private Integer vendor_id;
+    private String vendor_name;
+    private int quantity;
+    private double price;
 }

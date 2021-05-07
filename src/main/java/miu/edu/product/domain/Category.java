@@ -29,6 +29,8 @@ public class Category {
 
     private String imageUrl;
 
+//    private boolean isDeleted;
+
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
     private List<Product> products;

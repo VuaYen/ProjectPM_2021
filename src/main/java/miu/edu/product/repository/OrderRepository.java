@@ -1,7 +1,6 @@
 package miu.edu.product.repository;
 
-import miu.edu.product.domain.ScheduledDelivery;
-import miu.edu.product.domain.OnlineOrder;
+import miu.edu.product.domain.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -9,7 +8,9 @@ import org.springframework.data.repository.query.Param;
 import java.sql.Timestamp;
 import java.util.List;
 
-public interface OrderRepository extends JpaRepository<ScheduledDelivery,Integer> {
+public interface OrderRepository extends JpaRepository<OnlineOrder,Integer> {
+
+    List<OnlineOrder> findOrdersByCustomer(User user);
 
     @Query(value="select o.* " +
             " from scheduled_deliveries o, scheduled_deliveries_OrderDetail oi, orderdetail i,  vendor v " +
@@ -180,5 +181,6 @@ public interface OrderRepository extends JpaRepository<ScheduledDelivery,Integer
             "     WHERE o.id=oi.OnlineOrder_id and oi.orderDetailList_id=i.id and i.productId=p.productnumber and p.vendorId=v.id and v.id=:vendorId " +
             "     GROUP BY v.state",nativeQuery=true)
     public List<Object[]> findOrderShippingStateByVendor(Integer vendorId);
+
 }
 
