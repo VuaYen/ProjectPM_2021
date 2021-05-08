@@ -26,7 +26,7 @@ import java.io.OutputStream;
 import java.util.List;
 
 @RestController
-@RequestMapping("/report")
+@RequestMapping("api/report")
 public class ReportController {
     @Autowired
     ReportService reportService;

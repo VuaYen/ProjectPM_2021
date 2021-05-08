@@ -14,9 +14,6 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    // help us identify a guest user
-    // numeric value of the current time
-    // generate something random
     @NotNull
     private String sessionId;
 
