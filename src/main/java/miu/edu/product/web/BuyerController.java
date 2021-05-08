@@ -8,14 +8,17 @@ import miu.edu.product.dto.RemoveCartModel;
 import miu.edu.product.exception.OrderCreateException;
 import miu.edu.product.service.OrderService;
 import miu.edu.product.service.ProductService;
+import miu.edu.product.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.*;
 
 @Controller
@@ -25,7 +28,7 @@ public class BuyerController {
     private final ServletContext context;
     private final ProductService productService;
     private final OrderService orderService;
-
+    private final UserService userService;
 
 
     @Value("0.08")
@@ -35,10 +38,14 @@ public class BuyerController {
     private Double shippingFee;
 
     @Autowired
-    public BuyerController(ServletContext context, ProductService productService,OrderService orderService) {
+    public BuyerController(ServletContext context,
+                           ProductService productService,
+                           OrderService orderService,
+                           UserService userService) {
         this.context = context;
         this.productService = productService;
         this.orderService = orderService;
+        this.userService = userService;
 
     }
 
@@ -53,14 +60,14 @@ public class BuyerController {
     }
 
     @GetMapping("/check-out")
-    public String showCheckout( HttpServletRequest request, Model model) throws OrderCreateException {
+    public String showCheckout(HttpServletRequest request, Model model) throws OrderCreateException {
 
         Cart cart = (Cart) model.asMap().get("myCart");
         OnlineOrder order = new OnlineOrder();
 
         CheckOutModel checkOutModel = new CheckOutModel();
-        User customer =new User();
-        Address address= new Address();
+        User customer = new User();
+        Address address = new Address();
         address.setCity("Fairfield");
         address.setState("IA");
         address.setStreet("1000 4th");
@@ -102,6 +109,25 @@ public class BuyerController {
     @GetMapping("/login")
     public String showLoginForm(HttpServletRequest httpServletRequest) {
         return "/buyer/login";
+    }
+
+    @GetMapping("/register")
+    public String showRegistrationForm(HttpServletRequest httpServletRequest, Model model) {
+        model.addAttribute("user", new User());
+        return "/buyer/registration";
+    }
+
+    @PostMapping("/register")
+    public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            return "/buyer/registration";
+        }
+
+
+        userService.save(user);
+        return "redirect:/";
     }
 
     @GetMapping("/shopping-cart")
