@@ -86,7 +86,6 @@ public class OrderController {
         return ResponseEntity.ok(response);
     }
 
-
     @GetMapping("vendors/{vendorId}/complete")
     public ResponseEntity<ApiResponse<PagedResponse<ScheduledDeliveryResponse>>> getVendorsCompleteOrders(@PathVariable int vendorId,
                                                                                                           @RequestParam(name = "page", defaultValue = "1") int page,
@@ -120,7 +119,7 @@ public class OrderController {
         return ResponseEntity.ok(response);
     }
 
-    /// ==== Today's task
+
     @GetMapping("/active")
     public ResponseEntity<ApiResponse<PagedResponse<ScheduledDeliveryResponse>>> getActiveOrders(@RequestParam(name = "page", defaultValue = "1") int page,
                                                                                                  @RequestParam(name = "perPage", defaultValue = "20") int itemsPerPage) {
