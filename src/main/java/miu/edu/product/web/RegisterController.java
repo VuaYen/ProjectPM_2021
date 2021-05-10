@@ -25,6 +25,11 @@ public class RegisterController {
         return "buyer/registration";
     }
 
+    @GetMapping("/logout")
+    public String showLogOut(HttpServletRequest httpServletRequest) {
+        return "/buyer/login";
+    }
+
     @PostMapping("/saveUser")
     public String saveUser(@Valid @ModelAttribute(value="user") User user,
                               HttpServletRequest request){
