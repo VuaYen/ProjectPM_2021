@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -47,6 +48,11 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId")
     private List<Role> roles;
+
+    @Size(min = 6, message = "{error.password.size}")
+    private String password;
+
+    private UserType userType;
 
 
 }
