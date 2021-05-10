@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/user/ulayout}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/user/ulayout}">
 <head>
     <meta charset="UTF-8">
     <title>Account - Registration</title>
     <style>
-        .error{
+        .error {
             color: red;
         }
     </style>
@@ -14,79 +14,78 @@
 <div layout:fragment="user-main-content">
     <!--h1>Registration</h1-->
     <main class="main">
-    <div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17"
-         style="background-image: url('assets/images/backgrounds/login-bg.jpg')">
-        <div class="container">
-            <div class="form-box">
-                <div class="form-tab">
-                    <ul class="nav nav-pills nav-fill" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="register-tab-2" data-toggle="tab" href="#register-2"
-                               role="tab" aria-controls="register-2" aria-selected="true">Register</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane fade show active" id="register-2" role="tabpanel"
-                             aria-labelledby="register-tab-2">
-    <form method="post" th:action="@{/saveAccount}" >
-        <!--ul th:if="${#fields.hasErrors('*')}">
-            <li th:each="err : ${#fields.errors('*')}" th:text="${err}" >Input is incorrect</li>
-        </ul-->
-        <div class="form-group">
-            <label for="username" >Username *</label>
-            <input type="text" class="form-control" id="username"
-                   name="register-uname" required>
-            <span th:if="${#fields.hasErrors('username')}"  th:errorclass="error"></span>
-<!--            <span th:if="${existAccount == 1}" th:text="#{error.username.dup}" th:errorclass="error"></span>-->
-
-        </div><!-- End .form-group -->
-        <div class="form-group">
-            <label for="register-password-2" >Password *</label>
-            <input type="password" class="form-control" id="register-password-2"
-                   name="register-password" required>
-            <span th:if="${#fields.hasErrors('password')}" " th:errorclass="error"></span>
-        </div><!-- End .form-group -->
-        <div class="form-group">
-            <label for="first-name" >First name *</label>
-            <input type="text" class="form-control" id="first-name"
-                   name="reg-first-name" required>
-            <span th:if="${#fields.hasErrors('firstName')}"  th:errorclass="error"></span>
-        </div><!-- End .form-group -->
-        <div class="form-group">
-            <label for="last-name" >Last name *</label>
-            <input type="text" class="form-control" id="last-name"
-                   name="reg-last-name" required>
-            <span th:if="${#fields.hasErrors('lastName')}"  th:errorclass="error"></span>
-        </div><!-- End .form-group -->
-        <div class="form-group">
-            <label for="register-email-2" >Email address *</label>
-            <input type="email" class="form-control" id="register-email-2"
-                   name="register-email" required>
-            <span th:if="${#fields.hasErrors('email')}"  th:errorclass="error"></span>
-        </div><!-- End .form-group -->
-        <div class="form-group">
-            <!--input type="radio" name="user-type" value="Buyer" th:field="*{ACCOUNT_TYPE}" th:value="*{accountType.Buyer}" required><label
-                for="user-type" th:text="#{reg.buyer}">Buyer</label>
-            <input type="radio" name="user-type" value="Seller" th:field="*{accountType}" th:value="*{accountType.Seller}"><label
-                for="user-type" th:text="#{reg.seller}">Seller</label-->
-            <input type="radio" name="user-type" value="Buyer" required> <label
-                >Buyer</label>
-            <input type="radio" name="user-type" value="Seller"><label
-                >Vendor</label>
-        </div><!-- End .form-group -->
-        <div class="form-footer">
-            <button type="submit" class="btn btn-outline-primary-2">
-                <span>SIGN UP</span>
-                <i class="icon-long-arrow-right"></i>
-            </button>
-        </div>
-    </form>
-                        </div><!-- .End .tab-pane -->
-                    </div><!-- End .tab-content -->
-                </div><!-- End .form-tab -->
-            </div><!-- End .form-box -->
-        </div><!-- End .container -->
-    </div><!-- End .login-page section-bg -->
+        <div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17"
+             style="background-image: url('assets/images/backgrounds/login-bg.jpg')">
+            <div class="container">
+                <div class="form-box">
+                    <div class="form-tab">
+                        <ul class="nav nav-pills nav-fill" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="register-tab-2" data-toggle="tab" href="#register-2"
+                                   role="tab" aria-controls="register-2" aria-selected="true">Register</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="register-2" role="tabpanel"
+                                 aria-labelledby="register-tab-2">
+                                <form method="post" th:action="@{/register}" th:object="${user}">
+                                    <input type="hidden" name="userId" th:value="${user.id}"/>
+                                    <!--ul th:if="${#fields.hasErrors('*')}">
+                                        <li th:each="err : ${#fields.errors('*')}" th:text="${err}" >Input is incorrect</li>
+                                    </ul-->
+                                    <div class="form-group">
+                                        <label for="username">Username *</label>
+                                        <input type="text" class="form-control" id="username"
+                                               name="userName" th:value="${user.userName}" required>
+                                        <span th:if="${#fields.hasErrors('userName')}" th:errorclass="error"></span>
+                                    </div><!-- End .form-group -->
+                                    <div class="form-group">
+                                        <label for="register-password-2">Password *</label>
+                                        <input type="password" class="form-control" id="register-password-2"
+                                               name="password" th:value="${user.password}" required>
+                                        <span th:if="${#fields.hasErrors('password')}" th:errorclass="error"></span>
+                                    </div><!-- End .form-group -->
+                                    <div class="form-group">
+                                        <label for="first-name">First name *</label>
+                                        <input type="text" class="form-control" id="first-name"
+                                               name="firstName" th:value="${user.firstName}" required>
+                                        <span th:if="${#fields.hasErrors('firstName')}" th:errorclass="error"></span>
+                                    </div><!-- End .form-group -->
+                                    <div class="form-group">
+                                        <label for="last-name">Last name *</label>
+                                        <input type="text" class="form-control" id="last-name"
+                                               name="lastName" th:value="${user.lastName}" required>
+                                        <span th:if="${#fields.hasErrors('lastName')}" th:errorclass="error"></span>
+                                    </div><!-- End .form-group -->
+                                    <div class="form-group">
+                                        <label for="register-email-2">Email address *</label>
+                                        <input type="email" class="form-control" id="register-email-2"
+                                               name="email" th:value="${user.email}" required>
+                                        <span th:if="${#fields.hasErrors('email')}" th:errorclass="error"></span>
+                                    </div><!-- End .form-group -->
+                                    <div class="form-group">
+                                        <!--input type="radio" name="user-type" value="Buyer" th:field="*{ACCOUNT_TYPE}" th:value="*{accountType.Buyer}" required><label
+                                            for="user-type" th:text="#{reg.buyer}">Buyer</label>
+                                        <input type="radio" name="user-type" value="Seller" th:field="*{accountType}" th:value="*{accountType.Seller}"><label
+                                            for="user-type" th:text="#{reg.seller}">Seller</label-->
+                                        <input type="radio" name="user-type" value="Buyer" required> <label
+                                    >Buyer</label>
+                                        <input type="radio" name="user-type" value="Seller"><label
+                                    >Vendor</label>
+                                    </div><!-- End .form-group -->
+                                    <div class="form-footer">
+                                        <button type="submit" class="btn btn-outline-primary-2">
+                                            <span>SIGN UP</span>
+                                            <i class="icon-long-arrow-right"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div><!-- .End .tab-pane -->
+                        </div><!-- End .tab-content -->
+                    </div><!-- End .form-tab -->
+                </div><!-- End .form-box -->
+            </div><!-- End .container -->
+        </div><!-- End .login-page section-bg -->
     </main><!-- End .main -->
 </div>
 </body>
