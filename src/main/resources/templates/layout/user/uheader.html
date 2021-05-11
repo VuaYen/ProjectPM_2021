@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="">
+<html lang="en" xmlns:layout="http://www.thymeleaf.org" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Header</title>
@@ -11,14 +12,14 @@
             <div class="header-right">
                 <ul class="top-menu">
                     <li>
-                        <ul>
+                        <ul sec:authorize="isAnonymous()">
                             <li><a th:href="@{/login}">Sign in</a></li>
-                            <li><a th:href="@{/reg}">Sign up</a></li>
+                            <li><a th:href="@{/register}">Sign up</a></li>
                         </ul>
                     </li>
-                    <li >
-                        <ul>
-                            <li>Hello, <span ></span></li>
+                    <li>
+                        <ul sec:authorize="isAuthenticated()">
+                            <li>Hello, <span></span></li>
                             <li><a th:href="@{/logout}">Sign out</a></li>
                         </ul>
                     </li>
@@ -42,8 +43,8 @@
             </div><!-- End .header-left -->
 
 
-            <div class="header-right">
-                <div  class="dropdown compare-dropdown">
+            <div class="header-right" sec:authorize="isAuthenticated()">
+                <div class="dropdown compare-dropdown" >
                     <a th:href="@{/profile}" class="dropdown-toggle"
                        aria-haspopup="true" aria-expanded="false"
                        title="Profile" aria-label="Profile">
@@ -57,8 +58,8 @@
                     <a th:href="@{/shopping-cart}" class="dropdown-toggle" role="button">
                         <div class="icon">
                             <i class="icon-shopping-cart"></i>
-<!--                            <span class="cart-count" th:id="cart-count" th:text="${myCart.total}">1</span>-->
-                            <span class="cart-count" th:id="cart-count" th:text="${myCart.total}" >1</span>
+                            <!--                            <span class="cart-count" th:id="cart-count" th:text="${myCart.total}">1</span>-->
+                            <span class="cart-count" th:id="cart-count" th:text="${myCart.total}">1</span>
                         </div>
                         <p>Cart</p>
                     </a>

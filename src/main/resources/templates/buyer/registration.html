@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Account - Registration</title>
     <style>
-        .error{
+        .error {
             color: red;
         }
     </style>
@@ -28,45 +28,50 @@
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="register-2" role="tabpanel"
                                  aria-labelledby="register-tab-2">
-                                <form method="post" th:action="@{/saveUser}" th:object="${user}">
+                                <form method="post" th:action="@{/register}" th:object="${user}">
+                                    <input type="hidden" name="userId" th:value="${user.id}"/>
+                                    <!--ul th:if="${#fields.hasErrors('*')}">
+                                        <li th:each="err : ${#fields.errors('*')}" th:text="${err}" >Input is incorrect</li>
+                                    </ul-->
                                     <div class="form-group">
-                                        <label for="username" th:text="#{reg.username}">Username *</label>
+                                        <label for="username">Username *</label>
                                         <input type="text" class="form-control" id="username"
-
-                                               name="register-uname" required>
-
-                                        <!--            <span th:if="${existAccount == 1}" th:text="#{error.username.dup}" th:errorclass="error"></span>-->
-
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="register-password-2" th:text="#{reg.password}">Password *</label>
-                                        <input type="password" class="form-control" id="register-password-2"
-                                               name="register-password" required>
-                                        <!--                                        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:errorclass="error"></span>-->
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="first-name" th:text="#{reg.firstName}">First name *</label>
-                                        <input type="text" class="form-control" id="first-name"
-                                               name="reg-first-name" required>
-                                        <!--                                        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" th:errorclass="error"></span>-->
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="last-name" th:text="#{reg.lastName}">Last name *</label>
-                                        <input type="text" class="form-control" id="last-name"
-                                               name="reg-last-name" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="register-email-2" th:text="#{reg.email}">Email address *</label>
-                                        <input type="email" class="form-control" id="register-email-2"
-                                               name="register-email" required>
+                                               name="userName" th:value="${user.userName}" required>
+                                        <span th:if="${#fields.hasErrors('userName')}" th:errorclass="error"></span>
                                     </div><!-- End .form-group -->
                                     <div class="form-group">
-                                        <input type="radio" name="user-type" value="Buyer" required>
-                                        <label
-                                                for="user-type" th:text="#{reg.buyer}">Buyer</label>
-                                        <input type="radio" name="user-type" value="Vendor">
-                                        <label
-                                                for="user-type" th:text="#{reg.vendor}">Vendor</label>
+                                        <label for="register-password-2">Password *</label>
+                                        <input type="password" class="form-control" id="register-password-2"
+                                               name="password" th:value="${user.password}" required>
+                                        <span th:if="${#fields.hasErrors('password')}" th:errorclass="error"></span>
+                                    </div><!-- End .form-group -->
+                                    <div class="form-group">
+                                        <label for="first-name">First name *</label>
+                                        <input type="text" class="form-control" id="first-name"
+                                               name="firstName" th:value="${user.firstName}" required>
+                                        <span th:if="${#fields.hasErrors('firstName')}" th:errorclass="error"></span>
+                                    </div><!-- End .form-group -->
+                                    <div class="form-group">
+                                        <label for="last-name">Last name *</label>
+                                        <input type="text" class="form-control" id="last-name"
+                                               name="lastName" th:value="${user.lastName}" required>
+                                        <span th:if="${#fields.hasErrors('lastName')}" th:errorclass="error"></span>
+                                    </div><!-- End .form-group -->
+                                    <div class="form-group">
+                                        <label for="register-email-2">Email address *</label>
+                                        <input type="email" class="form-control" id="register-email-2"
+                                               name="email" th:value="${user.email}" required>
+                                        <span th:if="${#fields.hasErrors('email')}" th:errorclass="error"></span>
+                                    </div><!-- End .form-group -->
+                                    <div class="form-group">
+                                        <!--input type="radio" name="user-type" value="Buyer" th:field="*{ACCOUNT_TYPE}" th:value="*{accountType.Buyer}" required><label
+                                            for="user-type" th:text="#{reg.buyer}">Buyer</label>
+                                        <input type="radio" name="user-type" value="Seller" th:field="*{accountType}" th:value="*{accountType.Seller}"><label
+                                            for="user-type" th:text="#{reg.seller}">Seller</label-->
+                                        <input type="radio" name="user-type" value="Buyer" required> <label
+                                    >Buyer</label>
+                                        <input type="radio" name="user-type" value="Seller"><label
+                                    >Vendor</label>
                                     </div><!-- End .form-group -->
                                     <div class="form-footer">
                                         <button type="submit" class="btn btn-outline-primary-2">

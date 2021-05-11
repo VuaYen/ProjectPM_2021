@@ -39,3 +39,5 @@ spring:
           message: To confirm your account, please click here
           url: http://localhost:8081
     test-connection: false
+
+

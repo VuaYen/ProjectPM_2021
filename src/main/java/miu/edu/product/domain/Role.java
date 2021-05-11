@@ -16,6 +16,7 @@ public class Role {// extends BaseModel{
 //    @GeneratedValue
     private Long id;
     private int lv;
+    private String name;
 
     public Long getId() {
         return id;

@@ -29,12 +29,13 @@ public class User {
     private String gender;
     @Email
     @NotNull
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
     private String phone;
     @NotNull
     @Column(unique = true)
     private String userName;
+
 
     @Embedded
     private Address address;
@@ -44,15 +45,13 @@ public class User {
 
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="userId")
+    @JoinColumn(name = "userId")
     private List<Role> roles;
 
     @Size(min = 6, message = "{error.password.size}")
     private String password;
 
     private UserType userType;
-
-
 
 
 }
