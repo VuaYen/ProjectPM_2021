@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/user/ulayout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Method</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="user-main-content">
+    <form action="#" th:action="@{/payment/save}" th:object="${card}" method="post">
+        <div>
+                <h2>Payment Method</h2>
+                <div class="row form-group">
+                    <div class="col-md-3 mb-3">
+                        <label> Choose card type: </label>
+                    </div>
+                    <div class="custom-control custom-radio col-md-2 mb-3">
+                        <input type="radio" class="custom-control-input" id="visa" th:field="*{type}"
+                               th:value="Visa">
+                        <label class="custom-control-label" for="visa">Visa</label>
+                        <td class="text-danger" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></td>
+                    </div>
+                    <div class="custom-control custom-radio col-md-3 mb-3">
+                        <input type="radio" class="custom-control-input" id="master" th:field="*{type}"
+                               th:value="Master">
+
+                        <label class="custom-control-label" for="master">Master</label>
+                        <td class="text-danger" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></td>
+                    </div>
+                </div>
+            <div class="row">
+                <div class="col-md-6 mb-1">
+                            <label for="cardName">Card Name</label>
+                            <input th:field="*{nameOnCard}" placeholder="Enter the name on the card" class="form-control"
+                                   id="cardName" aria-describedby="cardNameHelp">
+                            <p class="text-danger" th:errors="*{nameOnCard}"></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-2">
+                            <label for="cardNumber">Card Number</label>
+                            <input th:field="*{cardNumber}" class="form-control" id="cardNumber"
+                                   aria-describedby="cardNumberHelp" placeholder="0000 0000 0000 0000 ">
+                    <p th:if="${#fields.hasErrors('cardNumber')}" th:errorclass="error" th:errors="*{cardNumber}"></p>
+                        </div>
+                    </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                        <label for="cardExpiry1">Exp Month</label>
+                        <input th:field="*{expMonth}" class="form-control" id="cardExpiry1"
+                               aria-describedby="cardExpiryHelp" placeholder="MM">
+                        <p class="text-danger" th:errors="*{expMonth}"></p>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="cardExpiry">Exp Year</label>
+                    <input th:field="*{expYear}" class="form-control" id="cardExpiry"
+                           aria-describedby="cardExpiryHelp" placeholder="MM/YY">
+                    <p class="text-danger" th:errors="*{expYear}"></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                        <label for="CVV">CVV</label>
+                        <input th:field="*{cvs}" class="form-control" id="CVV" aria-describedby="CVVHelp" placeholder="000">
+                        <p class="text-danger" th:errors="*{cvs}"></p>
+                    </div>
+            </div>
+                </div>
+<!--        ??-->
+        <div>
+            <h2>Billing address</h2>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="country">City</label>
+                <input th:field="*{shipping.city}" class="form-control" id="lastName" aria-describedby="lastNameHelp"
+                       placeholder="Enter City">
+                <p th:errors="*{shipping.city}" class="text-danger"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+            <label for="addressL1">Street</label>
+            <input th:field="*{shipping.street}" placeholder="Street Adress, PoBox, company name, c/o"
+                   class="form-control" id="addressL1" aria-describedby="addressL1Help">
+            <p th:errors="*{shipping.street}" class="text-danger"></p>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col-md-6 mb-5">
+            <label for="addressL2">State</label>
+            <input th:field="*{shipping.state}" class="form-control" id="addressL2" aria-describedby="addressL2Help"
+                   placeholder="State">
+            <p th:errors="*{shipping.state}" class="text-danger"></p>
+                </div>
+        </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-6">
+                <label for="country">Zip</label>
+                <input th:field="*{shipping.zip}" class="form-control" id="country" aria-describedby="countryHelp"
+                       placeholder="Enter Zip">
+                <p th:errors="*{shipping.zip}" class="text-danger"></p>
+            </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-6">
+            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Submit</button>
+                </div>
+        </div>
+        </div>
+    </form>
+
+
+</div>
+</body>
+</html>
