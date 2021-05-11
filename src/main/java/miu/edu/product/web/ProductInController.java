@@ -1,11 +1,18 @@
 package miu.edu.product.web;
 
+import miu.edu.product.domain.ApiResponse;
 import miu.edu.product.domain.Product;
 import miu.edu.product.domain.Vendor;
+import miu.edu.product.dto.ReportRequestDTO;
+import miu.edu.product.dto.ReportResponseDTO;
 import miu.edu.product.repository.VendorRepository;
 import miu.edu.product.service.CategoryService;
+import miu.edu.product.service.Converter;
 import miu.edu.product.service.ProductService;
+import miu.edu.product.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,6 +39,33 @@ public class ProductInController {
 
     @Autowired
     CategoryService categoryService;
+
+    @Autowired
+    ReportService reportService;
+    @GetMapping("/report")
+    public String generateDataReport(HttpServletRequest httpServletRequest,Model model) {
+        ApiResponse<ReportResponseDTO> response = new ApiResponse<>();
+        try {
+            //setup parameters
+            System.out.println("httpServletRequest " + httpServletRequest.toString());
+            ReportRequestDTO reportRequestDTO = Converter.convert(httpServletRequest);
+            System.out.println("ReportRequestDTO " + reportRequestDTO);
+            //generate sale report
+            ReportResponseDTO reportResponseDTO = reportService.generateReport(reportRequestDTO);
+
+            response.setData(reportResponseDTO);
+            response.setMessage("Successfully");
+            //response.setStatus();
+        } catch (Exception e) {
+            response.setStatus(500);
+            response.setMessage(e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response).toString();
+        }
+
+        model.addAttribute("reports", response.getData());
+        return "admin/report";
+    }
 
 
     @GetMapping("product")
