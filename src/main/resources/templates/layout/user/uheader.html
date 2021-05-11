@@ -19,7 +19,7 @@
                     </li>
                     <li>
                         <ul sec:authorize="isAuthenticated()">
-                            <li>Hello, <span></span></li>
+                            <li>Hello, <span th:text="${#authentication.getPrincipal().getUsername()}"></span></li>
                             <li><a th:href="@{/logout}">Sign out</a></li>
                         </ul>
                     </li>
