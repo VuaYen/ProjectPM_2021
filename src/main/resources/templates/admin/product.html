@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/admin/alayout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Market</title>
+    <script src="/assets/js/product.js"></script>
+    <style>
+        .error{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="admin-main-content">
+    <div id="layoutAuthentication">
+        <div id="layoutAuthentication_content">
+            <main>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-7">
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Product</h3></div>
+                                <div class="card-body">
+                                    <form th:action="@{/admin/product}" th:object="${product}" enctype="multipart/form-data" method="POST">
+                                        <div class="form-row">
+
+                                            <div class="col-md-6">
+                                                <div class="form-group"><label class="small mb-1" for="inputName" th:text="#{pro.name}">Name</label>
+                                                    <input class="form-control py-4" id="inputname" th:field="*{name}"  type="text" placeholder="Enter name" />
+                                                    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:errorclass="error"></span>
+                                                    <!--span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" th:errorclass="error"></span-->
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group"><label class="small mb-1" for="inputPrice" th:text="#{pro.price}">Price</label>
+                                                    <input class="form-control py-4" id="inputPrice" th:field="*{price}"  type="text" placeholder="Enter price" />
+                                                    <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}" th:errorclass="error"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group"> <label class="small mb-1" for="inputPrice" th:text="#{pro.category}">Category</label>
+                                                    <select class="form-control"  id="roles" th:field="*{category}">
+                                                        <option th:each="role: ${categories}" th:value="${role.id}" th:text="${role.name}">
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group"><label class="small mb-1" for="inputDescription" th:text="#{pro.description}">Description</label>
+
+                                                    <textarea class="form-control py-4" id="inputDescription" th:field="*{description}" cols="40" rows="5"  placeholder="Enter description"></textarea>
+<!--                                                    <input class="form-control py-4" id="inputDescription" th:field="*{description}" type="text" placeholder="Enter description" />-->
+
+                                                    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:errorclass="error"></span>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-6">
+                                                <img id="img" height="150"  th:src="*{photo}"/>
+                                                <input type="file" id="inp" name="file" th:field="*{image}" />
+                                                <span th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}" th:errorclass="error"></span>
+                                                <p>upload image < 1MB</p>
+                                            </div>
+                                        </div>
+<!--                                        <div class="form-group"><label class="small mb-1" for="inputEmailAddress">Email</label><input class="form-control py-4" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Enter email address" /></div>-->
+<!--                                        <div class="form-row">-->
+<!--                                            <div class="col-md-6">-->
+<!--                                                <div class="form-group"><label class="small mb-1" for="inputPassword">Password</label><input class="form-control py-4" id="inputPassword" type="password" placeholder="Enter password" /></div>-->
+<!--                                            </div>-->
+<!--                                            <div class="col-md-6">-->
+<!--                                                <div class="form-group"><label class="small mb-1" for="inputConfirmPassword">Confirm Password</label><input class="form-control py-4" id="inputConfirmPassword" type="password" placeholder="Confirm password" /></div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+                                        <div class="form-group mt-4 mb-0"><input type="submit" class="btn btn-primary btn-block" value="Save"/></div>
+                                    </form>
+
+                                </div>
+<!--                                <div class="card-footer text-center">-->
+<!--                                    <div class="small"><a href="register.html">Have an account? Go to login</a></div>-->
+<!--                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    
+    </div>
+</div>
+
+</body>
+</html>

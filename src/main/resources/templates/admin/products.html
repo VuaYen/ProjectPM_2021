@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/admin/alayout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Group3CS490</title>
+</head>
+<body>
+<div layout:fragment="admin-main-content">
+    <div class="card mb-4">
+        <div class="card-header"><i class="fas fa-table mr-1"></i>List of products</div>
+        <div class="card-body">
+            <a th:href="${'/admin/product'}">Add</a>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Command</th>
+                        <th>Vendor</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="product : ${products}">
+                        <td th:text="${product.name}">Prduct name</td>
+                        <td th:text="${product.category.name}">Category</td>
+                        <td th:text="${'$'+ product.price}">Edinburgh</td>
+                        <td><a th:href="${'/admin/product?productnumber='+product.productnumber}">Edit</a> |
+                            <form th:id="${product.productnumber}" th:action="@{'/admin/product/delete'}" method="post">
+                                <input th:id="${product.productnumber + '_id'}" type="hidden" th:value="${product.productnumber}" name="id">
+                              <input th:id="${product.productnumber + '_bt'}" type="submit" value="Delete">
+                            </form>
+                        </td>
+                        <td th:text="${'$'+ product.vendor.userName}">vendor username</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
