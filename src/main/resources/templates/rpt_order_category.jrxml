@@ -33,7 +33,7 @@ LIMIT 10]]>
     <pageHeader>
         <band height="79" splitType="Stretch">
             <staticText>
-                <reportElement mode="Opaque" x="0" y="30" width="550" height="29" uuid="90435186-8b28-4a24-b610-a5d5bcd5184d"/>
+                <reportElement mode="Opaque" x="0" y="30" width="550" height="29" forecolor="#1e4544" uuid="90435186-8b28-4a24-b610-a5d5bcd5184d"/>
                 <textElement textAlignment="Center" verticalAlignment="Middle">
                     <font size="16" isBold="true"/>
                 </textElement>

@@ -7,115 +7,229 @@
 </head>
 <body>
 <div layout:fragment="user-main-content">
+<!--    <main class="main">-->
+<!--        <div class="page-content">-->
+<!--            <div class="checkout">-->
+<!--                <div class="container">-->
+<!--                    <form th:action="@{/checkout}" th:object="${model}" method="post">-->
+<!--                        <div class="row">-->
+<!--                            &lt;!&ndash;                            <input type="hidden" th:field="*{model.}">&ndash;&gt;-->
+
+<!--                            <div class="col-lg-9">-->
+<!--                                <h2 class="checkout-title">Billing Details</h2>&lt;!&ndash; End .checkout-title &ndash;&gt;-->
+<!--                                <div class="row">-->
+<!--                                    <div class="col-sm-6">-->
+<!--                                        <label>First Name *</label>-->
+<!--                                        <input type="text" class="form-control"  readonly>-->
+<!--                                    </div>&lt;!&ndash; End .col-sm-6 &ndash;&gt;-->
+
+<!--                                    <div class="col-sm-6">-->
+<!--                                        <label>Last Name *</label>-->
+<!--                                        <input type="text" class="form-control" readonly>-->
+<!--                                    </div>&lt;!&ndash; End .col-sm-6 &ndash;&gt;-->
+<!--                                </div>-->
+<!--                                <div class="row">-->
+<!--                                    <div class="col-sm-6">-->
+<!--                                        <label>Email *</label>-->
+<!--                                        <input type="text" class="form-control"   readonly>-->
+<!--                                    </div>&lt;!&ndash; End .col-sm-6 &ndash;&gt;-->
+
+<!--                                    <div class="col-sm-6">-->
+<!--                                        <label>City *</label>-->
+<!--                                        <input type="text"  class="form-control"-->
+<!--                                               readonly>-->
+<!--                                    </div>&lt;!&ndash; End .col-sm-6 &ndash;&gt;-->
+<!--                                </div>-->
+<!--                                <div class="row">-->
+<!--                                    <div class="col-sm-6">-->
+<!--                                        <label>State *</label>-->
+<!--                                        <input type="text" class="form-control" readonly>-->
+<!--                                    </div>&lt;!&ndash; End .col-sm-6 &ndash;&gt;-->
+
+<!--                                    <div class="col-sm-6">-->
+<!--                                        <label>City *</label>-->
+<!--                                        <input type="text" class="form-control"-->
+<!--                                               readonly>-->
+<!--                                    </div>&lt;!&ndash; End .col-sm-6 &ndash;&gt;-->
+<!--                                </div>-->
+<!--                                <label>Address *</label>-->
+<!--                                <textarea type="text" class="form-control"-->
+<!--                                          placeholder="House number and Street name" readonly>-->
+<!--                                    </textarea>-->
+
+<!--                                <div class="text-left">-->
+<!--                                    <input type="checkbox" id="checkout-diff-address">-->
+<!--                                    <label class="custom-control-label" for="checkout-diff-address">Ship to a-->
+<!--                                        different address?</label>-->
+<!--                                </div>&lt;!&ndash; End .custom-checkbox &ndash;&gt;-->
+
+<!--                                <div class="shipping-address" style="display: none;">-->
+<!--                                    <h2 class="checkout-title">Shipping Details</h2>&lt;!&ndash; End .checkout-title &ndash;&gt;-->
+<!--                                    <label>Address *</label>-->
+<!--                                    <textarea th:field="*{order.shippingAddress}" id="order-shippingAddress" value="" type="text"-->
+<!--                                              class="form-control"-->
+<!--                                              placeholder="House number and Street name">-->
+<!--                                        </textarea>-->
+<!--                                </div>-->
+
+
+<!--                            </div>&lt;!&ndash; End .col-lg-9 &ndash;&gt;-->
+<!--                            <aside class="col-lg-3">-->
+<!--                                <div class="summary">-->
+<!--                                    <h3 class="summary-title">Your Order</h3>&lt;!&ndash; End .summary-title &ndash;&gt;-->
+
+<!--                                    <table class="table table-summary">-->
+<!--                                        <tbody>-->
+<!--                                        <tr class="summary-subtotal">-->
+<!--                                            <td>Subtotal:</td>-->
+<!--                                            <td >-->
+<!--                                                $160.00-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>Shipping:</td>-->
+<!--                                            <td th:text="${model.order.shippingFee}">-->
+<!--                                                Free shipping-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td>Tax:</td>-->
+<!--                                            <td th:text="${model.order.tax}">-->
+<!--                                                $16.00-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        <tr class="summary-total">-->
+<!--                                            <td>Total:</td>-->
+<!--                                            <td th:text="${model.order.total}" >-->
+<!--                                                $160.00-->
+<!--                                            </td>-->
+<!--                                        </tr>&lt;!&ndash; End .summary-total &ndash;&gt;-->
+
+<!--                                        </tbody>-->
+<!--                                    </table>&lt;!&ndash; End .table table-summary &ndash;&gt;-->
+
+
+<!--                                    <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">-->
+<!--                                        <span class="btn-text">Place Order</span>-->
+<!--                                        <span class="btn-hover-text">Place Order</span>-->
+<!--                                    </button>-->
+<!--                                </div>&lt;!&ndash; End .summary &ndash;&gt;-->
+<!--                            </aside>&lt;!&ndash; End .col-lg-3 &ndash;&gt;-->
+<!--                        </div>&lt;!&ndash; End .row &ndash;&gt;-->
+<!--                    </form>-->
+<!--                </div>&lt;!&ndash; End .container &ndash;&gt;-->
+<!--            </div>&lt;!&ndash; End .checkout &ndash;&gt;-->
+<!--        </div>&lt;!&ndash; End .page-content &ndash;&gt;-->
+<!--    </main>&lt;!&ndash; End .main &ndash;&gt;-->
     <main class="main">
         <div class="page-content">
             <div class="checkout">
                 <div class="container">
-                    <form th:action="@{/checkout}" th:object="${model}" method="post">
-                        <div class="row">
-                            <!--                            <input type="hidden" th:field="*{model.}">-->
+                    <form th:action="@{/payment}" th:object="${model}" method="post">
+                        <!--                        <div class="row">-->
+                        <!--                            &lt;!&ndash;                            <input type="hidden" th:field="*{model.}">&ndash;&gt;-->
 
-                            <div class="col-lg-9">
-                                <h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <label>First Name *</label>
-                                        <input type="text" class="form-control"  readonly>
-                                    </div><!-- End .col-sm-6 -->
+                        <!--                            <div class="col-lg-9">-->
+                        <!--                                <h2 class="checkout-title">Billing Details</h2>&lt;!&ndash; End .checkout-title &ndash;&gt;-->
+                        <!--                                <div class="row">-->
+                        <!--                                    <div class="col-sm-6">-->
+                        <!--                                        <label>First Name *</label>-->
+                        <!--                                        <input type="text" class="form-control"  readonly>-->
+                        <!--                                    </div>&lt;!&ndash; End .col-sm-6 &ndash;&gt;-->
 
-                                    <div class="col-sm-6">
-                                        <label>Last Name *</label>
-                                        <input type="text" class="form-control" readonly>
-                                    </div><!-- End .col-sm-6 -->
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <label>Email *</label>
-                                        <input type="text" class="form-control"   readonly>
-                                    </div><!-- End .col-sm-6 -->
+                        <!--                                    <div class="col-sm-6">-->
+                        <!--                                        <label>Last Name *</label>-->
+                        <!--                                        <input type="text" class="form-control" readonly>-->
+                        <!--                                    </div>&lt;!&ndash; End .col-sm-6 &ndash;&gt;-->
+                        <!--                                </div>-->
+                        <!--                                <div class="row">-->
+                        <!--                                    <div class="col-sm-6">-->
+                        <!--                                        <label>Email *</label>-->
+                        <!--                                        <input type="text" class="form-control"   readonly>-->
+                        <!--                                    </div>&lt;!&ndash; End .col-sm-6 &ndash;&gt;-->
 
-                                    <div class="col-sm-6">
-                                        <label>City *</label>
-                                        <input type="text"  class="form-control"
-                                               readonly>
-                                    </div><!-- End .col-sm-6 -->
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <label>State *</label>
-                                        <input type="text" class="form-control" readonly>
-                                    </div><!-- End .col-sm-6 -->
+                        <!--                                    <div class="col-sm-6">-->
+                        <!--                                        <label>City *</label>-->
+                        <!--                                        <input type="text"  class="form-control"-->
+                        <!--                                               readonly>-->
+                        <!--                                    </div>&lt;!&ndash; End .col-sm-6 &ndash;&gt;-->
+                        <!--                                </div>-->
+                        <!--                                <div class="row">-->
+                        <!--                                    <div class="col-sm-6">-->
+                        <!--                                        <label>State *</label>-->
+                        <!--                                        <input type="text" class="form-control" readonly>-->
+                        <!--                                    </div>&lt;!&ndash; End .col-sm-6 &ndash;&gt;-->
 
-                                    <div class="col-sm-6">
-                                        <label>City *</label>
-                                        <input type="text" class="form-control"
-                                               readonly>
-                                    </div><!-- End .col-sm-6 -->
-                                </div>
-                                <label>Address *</label>
-                                <textarea type="text" class="form-control"
-                                          placeholder="House number and Street name" readonly>
-                                    </textarea>
+                        <!--                                    <div class="col-sm-6">-->
+                        <!--                                        <label>City *</label>-->
+                        <!--                                        <input type="text" class="form-control"-->
+                        <!--                                               readonly>-->
+                        <!--                                    </div>&lt;!&ndash; End .col-sm-6 &ndash;&gt;-->
+                        <!--                                </div>-->
+                        <!--                                <label>Address *</label>-->
+                        <!--                                <textarea type="text" class="form-control"-->
+                        <!--                                          placeholder="House number and Street name" readonly>-->
+                        <!--                                    </textarea>-->
 
-                                <div class="text-left">
-                                    <input type="checkbox" id="checkout-diff-address">
-                                    <label class="custom-control-label" for="checkout-diff-address">Ship to a
-                                        different address?</label>
-                                </div><!-- End .custom-checkbox -->
+                        <!--                                <div class="text-left">-->
+                        <!--                                    <input type="checkbox" id="checkout-diff-address">-->
+                        <!--                                    <label class="custom-control-label" for="checkout-diff-address">Ship to a-->
+                        <!--                                        different address?</label>-->
+                        <!--                                </div>&lt;!&ndash; End .custom-checkbox &ndash;&gt;-->
 
-                                <div class="shipping-address" style="display: none;">
-                                    <h2 class="checkout-title">Shipping Details</h2><!-- End .checkout-title -->
-                                    <label>Address *</label>
-                                    <textarea th:field="*{order.shippingAddress}" id="order-shippingAddress" value="" type="text"
-                                              class="form-control"
-                                              placeholder="House number and Street name">
-                                        </textarea>
-                                </div>
-
-
-                            </div><!-- End .col-lg-9 -->
-                            <aside class="col-lg-3">
-                                <div class="summary">
-                                    <h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
-
-                                    <table class="table table-summary">
-                                        <tbody>
-                                        <tr class="summary-subtotal">
-                                            <td>Subtotal:</td>
-                                            <td >
-                                                $160.00
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Shipping:</td>
-                                            <td th:text="${model.order.shippingFee}">
-                                                Free shipping
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tax:</td>
-                                            <td th:text="${model.order.tax}">
-                                                $16.00
-                                            </td>
-                                        </tr>
-                                        <tr class="summary-total">
-                                            <td>Total:</td>
-                                            <td th:text="${model.order.total}" >
-                                                $160.00
-                                            </td>
-                                        </tr><!-- End .summary-total -->
-
-                                        </tbody>
-                                    </table><!-- End .table table-summary -->
+                        <!--                                <div class="shipping-address" style="display: none;">-->
+                        <!--                                    <h2 class="checkout-title">Shipping Details</h2>&lt;!&ndash; End .checkout-title &ndash;&gt;-->
+                        <!--                                    <label>Address *</label>-->
+                        <!--                                    <textarea th:field="*{order.shippingAddress}" id="order-shippingAddress" value="" type="text"-->
+                        <!--                                              class="form-control"-->
+                        <!--                                              placeholder="House number and Street name">-->
+                        <!--                                        </textarea>-->
+                        <!--                                </div>-->
 
 
-                                    <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
-                                        <span class="btn-text">Place Order</span>
-                                        <span class="btn-hover-text">Place Order</span>
-                                    </button>
-                                </div><!-- End .summary -->
-                            </aside><!-- End .col-lg-3 -->
-                        </div><!-- End .row -->
+                        <!--                            </div>&lt;!&ndash; End .col-lg-9 &ndash;&gt;-->
+                        <aside class="col-lg-3">
+                            <div class="summary">
+                                <h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
+
+                                <table class="table table-summary">
+                                    <tbody>
+                                    <tr class="summary-subtotal">
+                                        <td>Subtotal:</td>
+                                        <td >
+                                            $160.00
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Shipping:</td>
+                                        <td th:text="${model.order.shippingFee}">
+                                            Free shipping
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tax:</td>
+                                        <td th:text="${model.order.tax}">
+                                            $16.00
+                                        </td>
+                                    </tr>
+                                    <tr class="summary-total">
+                                        <td>Total:</td>
+                                        <td th:text="${model.order.total}" >
+                                            $160.00
+                                        </td>
+                                    </tr><!-- End .summary-total -->
+
+                                    </tbody>
+                                </table><!-- End .table table-summary -->
+
+
+                                <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
+                                    <span class="btn-text">Place Order</span>
+                                    <span class="btn-hover-text">Place Order</span>
+                                </button>
+                            </div><!-- End .summary -->
+                        </aside><!-- End .col-lg-3 -->
+                        <!--                        </div>&lt;!&ndash; End .row &ndash;&gt;-->
                     </form>
                 </div><!-- End .container -->
             </div><!-- End .checkout -->
