@@ -1,9 +1,12 @@
 package miu.edu.product.service;
 
 
+import miu.edu.product.domain.Category;
 import miu.edu.product.domain.Product;
 import miu.edu.product.domain.ProductStatus;
+import miu.edu.product.domain.Vendor;
 import miu.edu.product.repository.ProductRepository;
+import miu.edu.product.repository.VendorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +28,8 @@ public class ProductServiceImp implements ProductService {
 
 @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private VendorRepository vendorService;
 
 
     @Override
@@ -39,9 +44,7 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public Page<Product> paging(String username , Pageable pageable) {
-//        Seller seller=new Seller();
-//        seller.setUsername(username);
-//        return productPagingRepository.findProductsBySeller(seller,pageable);
+
         return null;
     }
 
@@ -53,11 +56,34 @@ public class ProductServiceImp implements ProductService {
 
         product.setCreatedDate(new Date());
 
+        product.setQuantity(0);
+
+        Vendor ventmp= new Vendor();
+        ventmp.setId(5);
+//        ventmp=vendorService.findById(5).get();
+        Category cattmp = new Category();
+        cattmp= categoryService.getById(1).get();
+        if (product.getVendor()==null){
+            product.setVendor(ventmp);
+            System.out.println(" vender null"+ventmp.getUserName());
+        }
+        if (product.getCategory()==null){
+            product.setCategory(cattmp);
+            System.out.println(" category null"+cattmp.getName());
+        }
+
         return productRepository.save(product);
     }
 
     @Override
     public void delete(Integer id) {
+        //Because there is not casecase orderdetail in product side, if we want to delete product and
+        //also delete ordertail. We need to delete orderdetail firstly. If this case cenarious, the quirerement is that
+        //we don't allow delete product if product has orderdetail, so we commant the code line below.
+        //orderDetailRepository.deleteByProductId(product.getId());
+
+        productRepository.deleteById(id);
+//        productRepository.deleteProductAndDeleteOrderDetailWihoutCastcase(id);
 
     }
 
