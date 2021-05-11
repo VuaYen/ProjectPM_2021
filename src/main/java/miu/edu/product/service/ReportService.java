@@ -337,7 +337,7 @@ public class ReportService implements IReportService{
             JRBeanCollectionDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(null, false);
             Map<String, Object> parameters = new HashMap<>();
             parameters.put("Today", new Date());
-            parameters.put("Title", "Sale Report");
+            parameters.put("Title", "Sales Report");
             parameters.put("SubTitle", "Report of Online Shopping");
             InputStream imgInputStream = resourceLoader.getResource("classpath:static/sales-report.png").getInputStream();
             parameters.put("Logo", imgInputStream);
