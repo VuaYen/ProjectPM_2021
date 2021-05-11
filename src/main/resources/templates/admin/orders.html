@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/admin/alayout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Group3CS490PM</title>
+</head>
+<body>
+<div layout:fragment="admin-main-content">
+    <div class="card mb-4">
+        <div class="card-header"><i class="fas fa-table mr-1"></i>List of new reviews</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Buyer</th>
+                        <th>OrderDate</th>
+                        <th>Subtotal</th>
+                        <th>Tax</th>
+                        <th>ShippingFee</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>DeliveryDate</th>
+                        <th>Command</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>No</td>
+                        <td>Buyer</td>
+                        <td>OrderDate</td>
+                        <td>Subtotal</td>
+                        <td>Tax</td>
+                        <td>ShippingFee</td>
+                        <td>Total</td>
+                        <td>Status</td>
+                        <td>DeliveryDate</td>
+                        <td>Command</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
