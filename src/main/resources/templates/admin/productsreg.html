@@ -28,13 +28,12 @@
                         <td th:text="${product.category.name}">Category</td>
                         <td th:text="${'$'+ product.price}">Edinburgh</td>
                         <td><a th:href="${'/admin/product?productnumber='+product.productnumber}">Edit</a> |
-                            <form th:id="${product.productnumber}" th:action="@{'/admin/product/delete'}" method="post">
+<!--                            <div th:if="${product.status == 1}">-->
+                                <form th:id="${product.productnumber}" th:action="@{'/admin/product/active'}" method="post">
                                 <input th:id="${product.productnumber + '_id'}" type="hidden" th:value="${product.productnumber}" name="id">
-                                <input th:id="${product.productnumber + '_bt'}" type="submit" value="Delete">
-                            </form><div th:if="${product.status==0}">
-                            <form method="post" th:id="${product.productnumber}" th:action="@{'/admin/product/active'}">
-                                <input type="submit" value="Approve" />
-                            </form></div>
+                                <input th:id="${product.productnumber + '_bt'}" type="submit" value="Approve">
+                            </form>
+<!--                            </div>-->
                         </td>
                         <td th:text="${'$'+ product.vendor.userName}">vendor username</td>
                     </tr>
