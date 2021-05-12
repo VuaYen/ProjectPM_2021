@@ -51,7 +51,6 @@ public class ProductServiceImp implements ProductService {
     @Override
     public Product save(Product product) {
 
-
         product.setStatus(ProductStatus.New);
 
         product.setCreatedDate(new Date());
@@ -70,6 +69,10 @@ public class ProductServiceImp implements ProductService {
         if (product.getCategory()==null){
             product.setCategory(cattmp);
             System.out.println(" category null"+cattmp.getName());
+        }
+        if (product.getPhoto()==null){
+            product.setPhoto("http://localhost:8080/assets/images/demos/demo-4/products/product-16.jpg");
+
         }
 
         return productRepository.save(product);

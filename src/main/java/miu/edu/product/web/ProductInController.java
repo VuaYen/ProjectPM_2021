@@ -134,6 +134,7 @@ public class ProductInController {
         productService.save(product);
         status.setComplete();
         return "redirect:/admin/products";
+
     }
 
 

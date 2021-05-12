@@ -23,7 +23,7 @@ import java.util.Date;
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotEmpty(message = "{error.string.empty}")
+//	@NotEmpty(message = "{error.string.empty}")
 	private Integer productnumber;
 	private String name;
 	@NotEmpty(message = "{error.string.empty}")
@@ -32,7 +32,7 @@ public class Product {
 	private String description;
 	@NotNull(message = "{error.any.null}")
 	private Double price;
-	@NotEmpty(message = "{error.string.empty}")
+//	@NotEmpty(message = "{error.string.empty}")
 	private String photo;
 	private Date createdDate;
 	private ProductStatus status;
