@@ -64,16 +64,16 @@
                                 </tbody>
                             </table>
                             <div class="cart-bottom">
-                                <a th:href="@{/check-out}"
+                                <a th:href="@{/check-out/{vendor}(vendor=${order.getKey()})}"
                                    class="btn btn-outline-dark-2"><span>PROCEED TO CHECKOUT</span><i
                                         class="icon-cc-mastercard"></i></a>
                             </div>
                         </div>
                         <aside class="col-lg-3">
                             <div class="summary summary-cart">
-                                <h3 class="summary-title"
+                                <h3 class="summary-title" th:text="${order.getKey()}"
                                 >
-                                    Seller name</h3>
+                                    Vendor name</h3>
 
                                 <table class="table table-summary">
                                     <tbody>
