@@ -196,25 +196,25 @@
                                     <tbody>
                                     <tr class="summary-subtotal">
                                         <td>Subtotal:</td>
-                                        <td >
+                                        <td th:text="${#numbers.formatDecimal(model.order.total - model.order.tax - model.order.shippingFee, 0, 'COMMA', 2, 'POINT')}">
                                             $160.00
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Shipping:</td>
-                                        <td th:text="${model.order.shippingFee}">
+                                        <td th:text="${#numbers.formatDecimal(model.order.shippingFee, 0, 'COMMA', 2, 'POINT')}">
                                             Free shipping
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Tax:</td>
-                                        <td th:text="${model.order.tax}">
+                                        <td th:text="${#numbers.formatDecimal(model.order.tax, 0, 'COMMA', 2, 'POINT')}">
                                             $16.00
                                         </td>
                                     </tr>
                                     <tr class="summary-total">
                                         <td>Total:</td>
-                                        <td th:text="${model.order.total}" >
+                                        <td th:text="${#numbers.formatDecimal(model.order.total, 0, 'COMMA', 2, 'POINT')}">
                                             $160.00
                                         </td>
                                     </tr><!-- End .summary-total -->

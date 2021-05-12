@@ -56,8 +56,13 @@ public class OnlineOrder extends Subject {
     @OneToMany(cascade = CascadeType.ALL)
     private List<OrderDetail> orderDetailList;
 
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id")
     private User customer;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "vendorId")
+    private Vendor vendor;
 
 
 

@@ -6,6 +6,7 @@ import miu.edu.product.dto.Cart;
 import miu.edu.product.dto.CheckOutModel;
 import miu.edu.product.dto.RemoveCartModel;
 import miu.edu.product.exception.OrderCreateException;
+import miu.edu.product.repository.VendorRepository;
 import miu.edu.product.service.OrderService;
 import miu.edu.product.service.ProductService;
 import miu.edu.product.service.UserService;
@@ -29,6 +30,9 @@ public class BuyerController {
     private final ProductService productService;
     private final OrderService orderService;
     private final UserService userService;
+
+    @Autowired
+    private VendorRepository vendorService;
 
 
     @Value("0.08")
@@ -59,11 +63,17 @@ public class BuyerController {
         return "buyer/404";
     }
 
-    @GetMapping("/check-out")
-    public String showCheckout(HttpServletRequest request, Model model) throws OrderCreateException {
+    @GetMapping("/check-out/{vendor}")
+    public String showCheckout(@PathVariable(name = "vendor") String vendor,HttpServletRequest request, Model model) throws OrderCreateException {
 
         Cart cart = (Cart) model.asMap().get("myCart");
         OnlineOrder order = new OnlineOrder();
+
+        order.setTax(11.92);
+        order.setTotal(175.92);
+        order.setShippingFee(15.0);
+        Vendor vendor1= vendorService.findVendorByUserName(vendor);
+        order.setVendor(vendor1);
 
         CheckOutModel checkOutModel = new CheckOutModel();
         User customer = new User();
