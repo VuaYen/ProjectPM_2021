@@ -10,6 +10,9 @@ import java.util.List;
 
 public interface VendorRepository extends JpaRepository<Vendor,Integer> {
 
+    @Query("select v FROM Vendor v  where v.userName=:username")
+    public Vendor findVendorByUserName( @Param("username") String username);
+
     @Query(value = "select v.* " +
             " from scheduled_deliveries o, scheduled_deliveries_OrderDetail oi, orderdetail i, product p, vendor v " +
             " where o.id=oi.scheduled_deliveries_id and oi.details_id=i.id and i.productId=p.productnumber and p.vendorId=v.id " +
