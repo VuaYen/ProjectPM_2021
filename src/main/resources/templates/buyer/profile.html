@@ -33,9 +33,9 @@
                                         <li th:each="err : ${#fields.errors('*')}" th:text="${err}" >Input is incorrect</li>
                                     </ul-->
                                     <div class="form-group">
-                                        <label for="username" th:text="#{reg.username}">Username *</label>
-                                        <input type="text" class="form-control" id="username" th:field="*{username}"
-                                               th:value="*{username}"
+                                        <label for="username" th:text="#{reg.userName}">Username *</label>
+                                        <input type="text" class="form-control" id="username" th:field="*{userName}"
+                                               th:value="*{userName}"
                                                name="register-uname" disabled>
                                         <!--span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" th:errorclass="error"></span-->
                                     </div><!-- End .form-group -->
@@ -72,44 +72,44 @@
                                     <div class="form-group">
                                         <label for="profile-addr-street" th:text="#{reg.addr.street}">Street *</label>
                                         <input type="text" class="form-control" id="profile-addr-street"
-                                               th:field="*{billingAddress.street}" th:value="*{billingAddress.street}"
+                                               th:field="*{address.street}" th:value="*{address.street}"
                                                name="profile-addr-street" required>
-                                        <span th:if="${#fields.hasErrors('billingAddress.street')}"
-                                              th:errors="*{billingAddress.street}" th:errorclass="error"></span>
+                                        <span th:if="${#fields.hasErrors('address.street')}"
+                                              th:errors="*{address.street}" th:errorclass="error"></span>
                                     </div><!-- End .form-group -->
                                     <div class="form-group">
                                         <label for="profile-addr-city" th:text="#{reg.addr.city}">City *</label>
                                         <input type="text" class="form-control" id="profile-addr-city"
-                                               th:field="*{billingAddress.city}" th:value="*{billingAddress.city}"
+                                               th:field="*{address.city}" th:value="*{address.city}"
                                                name="profile-addr-city" required>
-                                        <span th:if="${#fields.hasErrors('billingAddress.city')}"
-                                              th:errors="*{billingAddress.city}" th:errorclass="error"></span>
+                                        <span th:if="${#fields.hasErrors('address.city')}"
+                                              th:errors="*{address.city}" th:errorclass="error"></span>
                                     </div><!-- End .form-group -->
                                     <div class="form-group">
                                         <label for="profile-addr-state" th:text="#{reg.addr.state}">State *</label>
                                         <input type="text" class="form-control" id="profile-addr-state"
-                                               th:field="*{billingAddress.state}" th:value="*{billingAddress.state}"
+                                               th:field="*{address.state}" th:value="*{address.state}"
                                                name="profile-addr-state" required>
-                                        <span th:if="${#fields.hasErrors('billingAddress.state')}"
-                                              th:errors="*{billingAddress.state}" th:errorclass="error"></span>
+                                        <span th:if="${#fields.hasErrors('address.state')}"
+                                              th:errors="*{address.state}" th:errorclass="error"></span>
                                     </div><!-- End .form-group -->
                                     <div class="form-group">
-                                        <label for="profile-addr-zipcode" th:text="#{reg.addr.zipcode}">Zip Code
+                                        <label for="profile-addr-zipcode" th:text="#{reg.addr.zip}">Zip Code
                                             *</label>
                                         <input type="text" class="form-control" id="profile-addr-zipcode"
-                                               th:field="*{billingAddress.zipcode}" th:value="*{billingAddress.zipcode}"
+                                               th:field="*{address.zip}" th:value="*{address.zip}"
                                                name="profile-addr-zipcode" required>
-                                        <span th:if="${#fields.hasErrors('billingAddress.zipcode')}"
-                                              th:errors="*{billingAddress.zipcode}" th:errorclass="error"></span>
+                                        <span th:if="${#fields.hasErrors('address.zip')}"
+                                              th:errors="*{address.zip}" th:errorclass="error"></span>
                                     </div><!-- End .form-group -->
-                                    <div class="form-group">
-                                        <label for="profile-payment" th:text="#{reg.payment}">Payment *</label>
-                                        <input type="text" class="form-control" id="profile-payment"
-                                               th:field="*{payment}" th:value="*{payment}"
-                                               name="payment" required>
-                                        <span th:if="${#fields.hasErrors('payment')}" th:errors="*{payment}"
-                                              th:errorclass="error"></span>
-                                    </div><!-- End .form-group -->
+<!--                                    <div class="form-group">-->
+<!--                                        <label for="profile-payment" th:text="#{reg.payment}">Payment *</label>-->
+<!--                                        <input type="text" class="form-control" id="profile-payment"-->
+<!--                                               th:field="*{payment}" th:value="*{payment}"-->
+<!--                                               name="payment" required>-->
+<!--                                        <span th:if="${#fields.hasErrors('payment')}" th:errors="*{payment}"-->
+<!--                                              th:errorclass="error"></span>-->
+<!--                                    </div>&lt;!&ndash; End .form-group &ndash;&gt;-->
 
                                     <div class="form-footer">
                                         <button type="submit" class="btn btn-outline-primary-2">

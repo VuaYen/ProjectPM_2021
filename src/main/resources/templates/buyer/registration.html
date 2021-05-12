@@ -34,8 +34,8 @@
                                         <li th:each="err : ${#fields.errors('*')}" th:text="${err}" >Input is incorrect</li>
                                     </ul-->
                                     <div class="form-group">
-                                        <label for="username">Username *</label>
-                                        <input type="text" class="form-control" id="username"
+                                        <label for="userName">Username *</label>
+                                        <input type="text" class="form-control" id="userName"
                                                name="userName" th:value="${user.userName}" required>
                                         <span th:if="${#fields.hasErrors('userName')}" th:errorclass="error"></span>
                                     </div><!-- End .form-group -->
