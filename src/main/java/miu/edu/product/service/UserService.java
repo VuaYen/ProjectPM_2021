@@ -26,6 +26,11 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public List<User> all() {
+        return userRepository.findAll();
+    }
+
+    @Override
     public boolean createUser(User user) {
 //        Optional<User> existUser = userRepository.findById(user.getId());
 //        if(existUser.isPresent()){
