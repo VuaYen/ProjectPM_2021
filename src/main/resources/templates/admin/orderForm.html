@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/admin/alayout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders</title>
+</head>
+<body>
+
+<div id="main-content" layout:fragment="main-content">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Status</th>
+            <th scope="col">Products</th>
+            <th scope="col">Shipping Address</th>
+            <th scope="col">Billing Address</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+<!--        <tr th:value="${id}"></tr>-->
+<!--        <tr th:value="${status}"></tr>-->
+<!--        <tr th:each="order:${orderDetailList}">-->
+<!--            <th scope="row" th:text="${id}"></th>-->
+<!--            <td>a</td>-->
+
+<!--            <td th:each="pro:${}">-->
+<!--                ProductID:-<p>b</p>-->
+<!--                ProductPrice:-<p>c</p>-->
+<!--                ProductQty-<p>d</p>-->
+<!--            </td>-->
+<!--            <td>e</td>-->
+<!--            <td>f</td>-->
+<!--            <td>-->
+<!--                <a class="btn btn btn-primary" th:href="@{/admin/account/edit/{id}(id = ${id})}"> Edit</a>-->
+<!--                <a class="btn btn btn-danger" th:href="@{/admin/account/delete/{id}(id = ${id})}">Delete</a>-->
+<!--            </td>-->
+<!--        </tr>-->
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
