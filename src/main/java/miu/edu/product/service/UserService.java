@@ -61,10 +61,6 @@ public class UserService implements IUserService {
 
     @Override
     public <T extends User> T getByUsername(String username) {
-//        Optional<T> opt = userRepository.findById(username);
-//        if (opt.isPresent()) {
-//            return opt.get();
-//        }
-        return null;
+        return (T) userRepository.findByUserName(username).orElse(null);
     }
 }

@@ -48,7 +48,8 @@ public class IndexController {
 
         List<Product> listtop = productService.getTopProducts();
         List<Product> productListFollow = listtop;//new ArrayList<>();
-        productListFollow = listtop.subList(0, 4);
+        if (listtop.size() >= 4)
+            productListFollow = listtop.subList(0, 4);
         if (listtop.size() > 7)
             listtop = listtop.subList(1, 9);
 
@@ -60,33 +61,32 @@ public class IndexController {
     }
 
     @GetMapping("/products")
-    public String products(Model model, @RequestParam(name = "type",required = false) String type, HttpServletRequest request) {
+    public String products(Model model, @RequestParam(name = "type", required = false) String type, HttpServletRequest request) {
 //        System.out.println(type);
 //        Principal user = request.getUserPrincipal();
-        String type1 =type;
-        if(type1==null)
-            type1=" ";
+        String type1 = type;
+        if (type1 == null)
+            type1 = " ";
         String cat = request.getParameter("cat");
-        List<Product> list= new ArrayList<>();
-        String typep ="yes";
-        String follow="follow";
+        List<Product> list = new ArrayList<>();
+        String typep = "yes";
+        String follow = "follow";
         String title = "Product List";
         String pcur = request.getParameter("pcur");
 
         if (cat != null) {
             list = productService.getByCategory(Integer.parseInt(cat));
             title = title + " of " + list.get(0).getCategory().getName();
+        } else {
+            list = productService.all();
         }
-        else {
-                list = productService.all();
-            }
-        int curp =0;
-        if (pcur!=null){
-            curp =Integer.parseInt(pcur)-1;
+        int curp = 0;
+        if (pcur != null) {
+            curp = Integer.parseInt(pcur) - 1;
         }
-        int page =list.size()/8;
-        int start=curp*8, end =curp*8+8;
-        list = list.subList(start,end);
+        int page = list.size() / 8;
+        int start = curp * 8, end = curp * 8 + 8;
+        list = list.subList(start, end);
 
         model.addAttribute("typep", typep);
         model.addAttribute("follow", follow);
