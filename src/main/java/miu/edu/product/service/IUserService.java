@@ -15,4 +15,5 @@ public interface IUserService {
     public void approveNewUser(boolean status, String username);
 
     public <T extends User> T getByUsername(String username);
+    public User save(User user);
 }

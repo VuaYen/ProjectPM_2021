@@ -23,23 +23,29 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="user : ${users}">
+                    <tr th:each="user, itemStat : ${users}">
                         <td th:text="${user.firstName}">Firstname</td>
                         <td th:text="${user.lastName}">lastName</td>
                         <td th:text="${user.userName}">userName</td>
                         <td th:text="${user.email}">Email</td>
                         <td th:text="${user.userType}">type</td>
                         <td>
-                            <select multiple="multiple">
-                                <option value="ADMIN" text="ADMIN"></option>
-                                <option value="USER" text="USER"></option>
-                            </select>
+                            <ul>
+                                <li th:each="role : ${user.roles}">
+                                    <span th:text="${role.name}"></span>
+                                </li>
+                            </ul>
+                            <small>
+                                <a th:href="@{/admin/user/save/} + ${user.userName}">Update role</a>
+                            </small>
                         </td>
 
                     </tr>
 
                     </tbody>
                 </table>
+
+
             </div>
         </div>
     </div>

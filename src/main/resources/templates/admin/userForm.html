@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/admin/alayout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Group3CS490</title>
+</head>
+<body>
+<div layout:fragment="admin-main-content">
+    <div class="card mb-4">
+        <div class="card-header"><i class="fas fa-table mr-1"></i>User Profile</div>
+        <div class="card-body">
+
+            <form th:action="@{/admin/user/save/role}" th:object="${user}" method="POST">
+                <div class="form-row">
+
+                    <div class="col-md-12">
+                        <div class="form-group"><label class="small mb-1" for="userName">Username</label>
+                            <input readonly class="form-control py-4" id="userName" th:field="*{userName}" type="text"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group"><label class="small mb-1" for="firstName">Firstname</label>
+                            <input readonly class="form-control py-4" id="firstName" th:field="*{firstName}"
+                                   type="text"/>
+                            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                                  th:errorclass="error"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group"><label class="small mb-1" for="lastName">Lastname</label>
+                            <input readonly class="form-control py-4" id="lastName" th:field="*{lastName}" type="text"/>
+                            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                                  th:errorclass="error"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group"><label class="small mb-1" for="lastName">Roles</label>
+                            <div class="checkbox">
+                                <input type="checkbox" name="roles"
+                                       th:each="role: ${allRoles}"
+                                       th:text="${role.name}"
+                                       th:value="${role}"
+                                       th:field="*{roles}"/>
+                                <!--th:checked="${not user.roles.?[name == role.name].isEmpty()} ? 'checked'"-->
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="form-group mt-4 mb-0"><input type="submit" class="btn btn-primary btn-block" value="Save"/>
+                </div>
+
+            </form>
+
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

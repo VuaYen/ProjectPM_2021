@@ -16,6 +16,15 @@ public class Role {// extends BaseModel{
 //    @GeneratedValue
     private Long id;
     private int lv;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     private String name;
 
     public Long getId() {

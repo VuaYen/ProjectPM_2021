@@ -8,7 +8,10 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -46,12 +49,21 @@ public class User {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId")
-    private List<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
     @Size(min = 6, message = "{error.password.size}")
     private String password;
 
+    @Transient
+    private String confirmPassword;
+
     private UserType userType;
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
 
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 }

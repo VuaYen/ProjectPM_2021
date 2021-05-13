@@ -9,17 +9,14 @@ import miu.edu.product.exception.OrderCreateException;
 import miu.edu.product.repository.VendorRepository;
 import miu.edu.product.service.OrderService;
 import miu.edu.product.service.ProductService;
-import miu.edu.product.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.util.*;
 
 @Controller
@@ -29,7 +26,6 @@ public class BuyerController {
     private final ServletContext context;
     private final ProductService productService;
     private final OrderService orderService;
-    private final UserService userService;
 
     @Autowired
     private VendorRepository vendorService;
@@ -44,12 +40,10 @@ public class BuyerController {
     @Autowired
     public BuyerController(ServletContext context,
                            ProductService productService,
-                           OrderService orderService,
-                           UserService userService) {
+                           OrderService orderService) {
         this.context = context;
         this.productService = productService;
         this.orderService = orderService;
-        this.userService = userService;
 
     }
 
@@ -64,7 +58,7 @@ public class BuyerController {
     }
 
     @GetMapping("/check-out/{vendor}")
-    public String showCheckout(@PathVariable(name = "vendor") String vendor,HttpServletRequest request, Model model) throws OrderCreateException {
+    public String showCheckout(@PathVariable(name = "vendor") String vendor, HttpServletRequest request, Model model) throws OrderCreateException {
 
         Cart cart = (Cart) model.asMap().get("myCart");
         OnlineOrder order = new OnlineOrder();
@@ -72,7 +66,7 @@ public class BuyerController {
         order.setTax(11.92);
         order.setTotal(175.92);
         order.setShippingFee(15.0);
-        Vendor vendor1= vendorService.findVendorByUserName(vendor);
+        Vendor vendor1 = vendorService.findVendorByUserName(vendor);
         order.setVendor(vendor1);
 
         CheckOutModel checkOutModel = new CheckOutModel();
@@ -116,29 +110,6 @@ public class BuyerController {
         return "buyer/home";
     }
 
-    @GetMapping("/login")
-    public String showLoginForm(HttpServletRequest httpServletRequest) {
-        return "/buyer/login";
-    }
-
-    @GetMapping("/register")
-    public String showRegistrationForm(HttpServletRequest httpServletRequest, Model model) {
-        model.addAttribute("user", new User());
-        return "/buyer/registration";
-    }
-
-    @PostMapping("/register")
-    public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
-
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("errors", bindingResult.getAllErrors());
-            return "/buyer/registration";
-        }
-
-
-        userService.save(user);
-        return "redirect:/";
-    }
 
     @GetMapping("/shopping-cart")
     public String showCart(Model model) {
