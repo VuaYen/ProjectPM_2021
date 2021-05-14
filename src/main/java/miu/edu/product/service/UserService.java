@@ -20,9 +20,17 @@ public class UserService implements IUserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public User save(User user){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    public User save(User user) {
+
+        boolean isExists = this.getByUsername(user.getUserName()) != null ? true : false;
+        if (!isExists)
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
+    }
+
+    @Override
+    public List<User> all() {
+        return userRepository.findAll();
     }
 
     @Override
@@ -56,7 +64,7 @@ public class UserService implements IUserService {
 
     @Override
     public void approveNewUser(boolean status, String username) {
-        userRepository.approveNewUserAccount(status,username);
+        userRepository.approveNewUserAccount(status, username);
     }
 
     @Override

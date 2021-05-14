@@ -4,6 +4,8 @@ import miu.edu.product.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -46,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/resources/static/**", "/assets/**", "/img/**", "/css/**", "/public/**").permitAll()
                 .antMatchers("/", "/home").permitAll()
                 .antMatchers("/register", "/saveAccount", "/about", "/contact").permitAll()
-                .antMatchers("/admin/**").permitAll()
+//                .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/product/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -62,5 +64,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .exceptionHandling();
+    }
+
+    @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 }
