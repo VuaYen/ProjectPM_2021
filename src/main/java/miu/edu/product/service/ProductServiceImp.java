@@ -123,6 +123,11 @@ public class ProductServiceImp implements ProductService {
 
     }
 
+    @Override
+    public List<Product> findAllByStatus(ProductStatus status) {
+        return productRepository.findAllByStatus((status));
+    }
+
     public static <T> List<T> toList(final Iterable<T> iterable) {
         return StreamSupport.stream(iterable.spliterator(), false)
                 .collect(Collectors.toList());

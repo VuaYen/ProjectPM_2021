@@ -17,27 +17,42 @@
                         <th>No</th>
                         <th>Buyer</th>
                         <th>OrderDate</th>
-                        <th>Subtotal</th>
+                        <th>Vendor</th>
                         <th>Tax</th>
                         <th>ShippingFee</th>
                         <th>Total</th>
                         <th>Status</th>
-                        <th>DeliveryDate</th>
+                        <th>Vendor</th>
                         <th>Command</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>No</td>
-                        <td>Buyer</td>
-                        <td>OrderDate</td>
-                        <td>Subtotal</td>
-                        <td>Tax</td>
-                        <td>ShippingFee</td>
-                        <td>Total</td>
-                        <td>Status</td>
-                        <td>DeliveryDate</td>
-                        <td>Command</td>
+                    <tr th:each="order : ${orders}">
+                        <td th:text="${order.orderno}">No</td>
+                        <td th:text="${order.customer.userName}">Buyer</td>
+                        <td th:text="${order.dateCreate}">OrderDate</td>
+                        <td th:text="${order.vendor.email}">Email</td>
+                        <td th:text="${order.tax}">Tax</td>
+                        <td th:text="${order.shippingFee}">ShippingFee</td>
+                        <td th:text="${order.total}">Total</td>
+                        <td th:text="${order.status}">Status</td>
+                        <td th:text="${order.vendor.userName}">Vendor</td>
+                        <td>
+                            <form th:id="${order.id}" th:action="@{'/admin/changeStatus'}" method="post">
+                                <input th:id="${order.id+'_order'}" name="id" th:value="${order.id}" type="hidden">
+                                <select name="status" th:id="${order.id+'_select'}">
+                                    <option value="NEW" th:text="New" th:selected="${order.sStatus=='NEW'}"></option>
+                                    <option value="RECEIVED" th:text="New" th:selected="${order.sStatus=='RECEIVED'}"></option>
+                                    <option value="SHIPPED" th:text="Shipped" th:selected="${order.sStatus=='SHIPPED'}"></option>
+                                    <option value="OnTheWay" th:text="OnTheWay" th:selected="${order.sStatus=='ON_THE_WAY'}"></option>
+                                    <option value="ON_THE_WAY" th:text="Delivered" th:selected="${order.sStatus=='DELIVERED'}"></option>
+                                    <option value="CANCELLED" th:text="Cancel" th:selected="${order.sStatus=='CANCELLED'}"></option>
+                                    <option value="DELETED" th:text="Cancel" th:selected="${order.sStatus=='DELETED'}"></option>
+
+                                </select>
+                                <input th:id="${order.id+'_submit'}" type="submit" value="update" />
+                            </form>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

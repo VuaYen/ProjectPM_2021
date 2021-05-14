@@ -80,12 +80,12 @@ public class BuyerController {
         customer.setAddress(address);
         customer.setEmail("yen637@gmail.com");
         customer.setUserName("thepham");
-
+        customer.setId(3);
         checkOutModel.setCustomer(customer);
         checkOutModel.setOrder(order);
 
-        orderService.placeOrder(order);
-        System.out.println(order.getOrderno());
+//        orderService.placeOrder(order);
+//        System.out.println(order.getOrderno());
 
         model.addAttribute("model", checkOutModel);
         return "buyer/checkout";

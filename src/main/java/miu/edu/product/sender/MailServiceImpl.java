@@ -18,15 +18,11 @@ import java.util.Properties;
 public class MailServiceImpl implements MailService{
     @Override
     public Object sendMailA() {
-        // Set required configs
-        String from = "from_mail@gmail.com";
-        String to = "to_mail@gmail.com";
-        String host = "smtp.gmail.com";
-        String port = "587";
-        String user = "from_mail@gmail.com";
-        String password = "from_mail_password";
-
-        // Set system properties
+        String from= new String() ;
+        String host =new String()  ;
+        String port =new String();
+        String user = new String();
+        String password = new String();
         Properties properties = System.getProperties();
         properties.put("mail.smtp.auth", "true");
         properties.setProperty("mail.smtp.host", host);
@@ -43,8 +39,6 @@ public class MailServiceImpl implements MailService{
             MimeMessage message = new MimeMessage(session);
             // Set from email address
             message.setFrom(new InternetAddress(from, "Group3CS490PM_2021"));
-            // Set the recipient email address
-            message.addRecipient(MimeMessage.RecipientType.TO, new InternetAddress(to));
             // Set email subject
             message.setSubject("Mail Subject");
             // Initiate body of email address
@@ -84,13 +78,11 @@ public class MailServiceImpl implements MailService{
     @Override
     public Object sendMailMulti() {
         // Set required configs
-        String from = "from_mail@gmail.com";
-        String host = "smtp.gmail.com";
-        String port = "587";
-        String user = "from_mail@gmail.com";
-        String password = "from_mail_password";
-
-        // Set system properties
+        String from= new String() ;
+        String host =new String()  ;
+        String port =new String();
+        String user = new String();
+        String password = new String();
         Properties properties = System.getProperties();
         properties.put("mail.smtp.auth", "true");
         properties.setProperty("mail.smtp.host", host);
@@ -154,15 +146,11 @@ public class MailServiceImpl implements MailService{
 
     @Override
     public Object sendMailHTML() {
-        // Set required configs
-        String from = "from_mail@gmail.com";
-        String to = "to_mail@gmail.com";
-        String host = "smtp.gmail.com";
-        String port = "587";
-        String user = "from_mail@gmail.com";
-        String password = "from_mail_password";
-
-        // Set system properties
+        String from= new String() ;
+        String host =new String()  ;
+        String port =new String();
+        String user = new String();
+        String password = new String();
         Properties properties = System.getProperties();
         properties.put("mail.smtp.auth", "true");
         properties.setProperty("mail.smtp.host", host);
@@ -173,15 +161,11 @@ public class MailServiceImpl implements MailService{
 
         // Get the default Session object.
         Session session = Session.getDefaultInstance(properties);
-
         try {
             // Create a default MimeMessage object.
             MimeMessage message = new MimeMessage(session);
             // Set from email address
             message.setFrom(new InternetAddress(from, "Group3CS490PM_2021"));
-            // Set the recipient email address
-            message.addRecipient(MimeMessage.RecipientType.TO, new InternetAddress(to));
-            // Set email subject
             message.setSubject("Mail Subject");
             // Set email body
             message.setContent("<h1>hello</h1>","text/html");
@@ -212,9 +196,56 @@ public class MailServiceImpl implements MailService{
 
     @Override
     public Object sendMail(String to) {
-        // Set required configs
+        // Set the recipient email address
+        String from= new String() ;
+        String host =new String()  ;
+        String port =new String();
+        String user = new String();
+        String password = new String();
+        Properties properties = System.getProperties();
+        properties.put("mail.smtp.auth", "true");
+        properties.setProperty("mail.smtp.host", host);
+        properties.setProperty("mail.smtp.port", port);
+        properties.setProperty("mail.smtp.user", user);
+        properties.setProperty("mail.smtp.password", password);
+        properties.setProperty("mail.smtp.starttls.enable", "true");
+
+        // Get the default Session object.
+        Session session = Session.getDefaultInstance(properties);
+
+        try {
+            // Create a default MimeMessage object.
+            MimeMessage message = new MimeMessage(session);
+            // Set from email address
+            message.setFrom(new InternetAddress(from, "Group3CS490PM_2021"));
+            // Set the recipient email address
+            message.addRecipient(MimeMessage.RecipientType.TO, new InternetAddress(to));
+            // Set email subject
+            message.setSubject("Test mail");
+            // Set email body
+//            message.setText("This is message body test");
+            message.setContent("<h1>hello</h1>","text/html");
+            // Set configs for sending email
+            Transport transport = session.getTransport("smtp");
+            transport.connect(host, from, password);
+            // Send email
+            transport.sendMessage(message, message.getAllRecipients());
+            transport.close();
+            System.out.println("done");
+            return "Email Sent! Check Inbox!";
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (AddressException e) {
+            e.printStackTrace();
+        } catch (javax.mail.MessagingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Object sendMail(String to, String content) {
         String from = "thephamec@gmail.com";
-//        to = "to_mail@gmail.com";
         String host = "smtp.gmail.com";
         String port = "587";
         String user = "thephamec@gmail.com";
@@ -240,10 +271,11 @@ public class MailServiceImpl implements MailService{
             // Set the recipient email address
             message.addRecipient(MimeMessage.RecipientType.TO, new InternetAddress(to));
             // Set email subject
-            message.setSubject("Test mail");
+            message.setSubject("Order Information ");
             // Set email body
 //            message.setText("This is message body test");
-            message.setContent("<h1>hello</h1>","text/html");
+            message.setContent("<h1>This is your Order</h1>" +
+                    content,"text/html");
             // Set configs for sending email
             Transport transport = session.getTransport("smtp");
             transport.connect(host, from, password);
