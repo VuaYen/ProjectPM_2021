@@ -11,7 +11,7 @@
         <div class="card-header"><i class="fas fa-table mr-1"></i>User Profile</div>
         <div class="card-body">
 
-            <form th:action="@{/admin/user/save/role}" th:object="${user}" method="POST">
+            <form th:action="@{/admin/user/save/role}" th:object="${user}" method="POST" enctype="multipart/form-data">
                 <div class="form-row">
 
                     <div class="col-md-12">
@@ -38,10 +38,11 @@
                     <div class="col-md-12">
                         <div class="form-group"><label class="small mb-1" for="lastName">Roles</label>
                             <div class="checkbox">
+                                <!--<input type="hidden" name="_roles" th:field="*{roles}"/>-->
                                 <input type="checkbox" name="roles"
                                        th:each="role: ${allRoles}"
                                        th:text="${role.name}"
-                                       th:value="${role}"
+                                       th:value="${role.id}"
                                        th:field="*{roles}"/>
                                 <!--th:checked="${not user.roles.?[name == role.name].isEmpty()} ? 'checked'"-->
                             </div>

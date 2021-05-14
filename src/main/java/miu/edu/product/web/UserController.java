@@ -4,7 +4,9 @@ import miu.edu.product.domain.Product;
 import miu.edu.product.domain.Role;
 import miu.edu.product.domain.User;
 import miu.edu.product.domain.UserForm;
+import miu.edu.product.service.IRoleService;
 import miu.edu.product.service.IUserService;
+import miu.edu.product.utils.StringToRoleConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,16 +14,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/admin")
+@SessionAttributes("myCart")
 public class UserController {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private IRoleService roleService;
 
     @GetMapping("/user")
     public String showUserList(Model model, HttpServletRequest request) {
@@ -35,18 +39,7 @@ public class UserController {
     public String showUserRole(@PathVariable String username, Model model, HttpServletRequest request) {
 
         User user = userService.getByUsername(username);
-
-        List<Role> roles = new ArrayList<>();
-
-        Role role = new Role();
-        role.setId(1L);
-        role.setName("ADMIN");
-        roles.add(role);
-
-        role = new Role();
-        role.setId(2L);
-        role.setName("USER");
-        roles.add(role);
+        List<Role> roles = roleService.findAll();
 
         model.addAttribute("user", user);
         model.addAttribute("allRoles", roles);
@@ -55,11 +48,26 @@ public class UserController {
 
     @PostMapping("/user/save/role")
     public String registerUserRole(@ModelAttribute("user") User user,
-                                   BindingResult bindingResult,
                                    Model model,
+                                   @RequestParam(value = "roles", required = false) String[] roles,
                                    HttpServletRequest request) {
 
-        System.out.println(user.getRoles().size() + " ***********");
+        if (roles != null) {
+            StringToRoleConverter converter = new StringToRoleConverter();
+            Set<Role> roleSet = new HashSet<>();
+            for (String r : roles) {
+                System.out.println(r);
+                Role role = converter.convert(r);
+                if (role != null) {
+                    roleSet.add(role);
+                }
+            }
+
+            User u = userService.getByUsername(user.getUserName());
+            u.setRoles(roleSet);
+            userService.save(u);
+        }
+
         List<User> userList = userService.all();
         model.addAttribute("users", userList);
 

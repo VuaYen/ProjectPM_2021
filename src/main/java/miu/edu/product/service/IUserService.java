@@ -8,7 +8,7 @@ import java.util.List;
 public interface IUserService {
     public List<User> all();
     public  boolean createUser(User user);
-    public <T extends User> T saveProfile(T user);
+    public User saveProfile(User user);
 
     public List<User> getNewVendorUser();
 
@@ -16,4 +16,5 @@ public interface IUserService {
 
     public <T extends User> T getByUsername(String username);
     public User save(User user);
+    public User saveRole(User user);
 }

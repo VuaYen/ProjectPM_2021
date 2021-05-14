@@ -16,4 +16,14 @@ public class Address {
 	private String city;
 	private String state;
 	private String zip;
+
+	@Override
+	public String toString() {
+		return "Address{" +
+				"street='" + street + '\'' +
+				", city='" + city + '\'' +
+				", state='" + state + '\'' +
+				", zip='" + zip + '\'' +
+				'}';
+	}
 }

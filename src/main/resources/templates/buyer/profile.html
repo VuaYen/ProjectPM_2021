@@ -28,28 +28,24 @@
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="register-2" role="tabpanel"
                                  aria-labelledby="register-tab-2">
-                                <form method="post" th:action="@{saveProfile}" th:object="${accBuyer}">
+                                <form method="post" th:action="@{saveProfile}" th:object="${user}">
+                                    <input type="hidden" name="id" th:field="*{id}"/>
+                                    <input type="hidden" name="roles" th:field="*{roles}"/>
                                     <!--ul th:if="${#fields.hasErrors('*')}">
                                         <li th:each="err : ${#fields.errors('*')}" th:text="${err}" >Input is incorrect</li>
                                     </ul-->
                                     <div class="form-group">
-                                        <label for="username" th:text="#{reg.userName}">Username *</label>
-                                        <input type="text" class="form-control" id="username" th:field="*{userName}"
-                                               th:value="*{userName}"
-                                               name="register-uname" disabled>
+                                        <label for="username">Username *</label>
+                                        <input readonly type="text" class="form-control" id="userName"
+                                               th:field="*{userName}"
+                                               th:value="*{userName}" name="userName">
                                         <!--span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" th:errorclass="error"></span-->
                                     </div><!-- End .form-group -->
-                                    <!--div class="form-group">
-                                        <label for="register-password-2" th:text="#{reg.password}">Password *</label>
-                                        <input type="text" class="form-control" id="register-password-2" th:field="*{password}" th:value="*{password}"
-                                               name="register-password" required>
-                                        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:errorclass="error"></span>
-                                    </div--><!-- End .form-group -->
                                     <div class="form-group">
                                         <label for="first-name" th:text="#{reg.firstName}">First name *</label>
                                         <input type="text" class="form-control" id="first-name" th:field="*{firstName}"
                                                th:value="*{firstName}"
-                                               name="reg-first-name" required>
+                                               name="firstName" required>
                                         <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
                                               th:errorclass="error"></span>
                                     </div><!-- End .form-group -->
@@ -57,15 +53,15 @@
                                         <label for="last-name" th:text="#{reg.lastName}">Last name *</label>
                                         <input type="text" class="form-control" id="last-name" th:field="*{lastName}"
                                                th:value="*{lastName}"
-                                               name="reg-last-name" required>
+                                               name="lastName" required>
                                         <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
                                               th:errorclass="error"></span>
                                     </div><!-- End .form-group -->
                                     <div class="form-group">
                                         <label for="register-email-2" th:text="#{reg.email}">Email address *</label>
-                                        <input type="email" class="form-control" id="register-email-2"
+                                        <input readonly type="email" class="form-control" id="register-email-2"
                                                th:field="*{email}" th:value="*{email}"
-                                               name="register-email" required>
+                                               name="email" required>
                                         <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
                                               th:errorclass="error"></span>
                                     </div><!-- End .form-group -->
@@ -73,7 +69,7 @@
                                         <label for="profile-addr-street" th:text="#{reg.addr.street}">Street *</label>
                                         <input type="text" class="form-control" id="profile-addr-street"
                                                th:field="*{address.street}" th:value="*{address.street}"
-                                               name="profile-addr-street" required>
+                                               name="street">
                                         <span th:if="${#fields.hasErrors('address.street')}"
                                               th:errors="*{address.street}" th:errorclass="error"></span>
                                     </div><!-- End .form-group -->
@@ -81,7 +77,7 @@
                                         <label for="profile-addr-city" th:text="#{reg.addr.city}">City *</label>
                                         <input type="text" class="form-control" id="profile-addr-city"
                                                th:field="*{address.city}" th:value="*{address.city}"
-                                               name="profile-addr-city" required>
+                                               name="city">
                                         <span th:if="${#fields.hasErrors('address.city')}"
                                               th:errors="*{address.city}" th:errorclass="error"></span>
                                     </div><!-- End .form-group -->
@@ -89,27 +85,18 @@
                                         <label for="profile-addr-state" th:text="#{reg.addr.state}">State *</label>
                                         <input type="text" class="form-control" id="profile-addr-state"
                                                th:field="*{address.state}" th:value="*{address.state}"
-                                               name="profile-addr-state" required>
+                                               name="state">
                                         <span th:if="${#fields.hasErrors('address.state')}"
                                               th:errors="*{address.state}" th:errorclass="error"></span>
                                     </div><!-- End .form-group -->
                                     <div class="form-group">
-                                        <label for="profile-addr-zipcode" th:text="#{reg.addr.zip}">Zip Code
-                                            *</label>
+                                        <label for="profile-addr-zipcode">Zip Code *</label>
                                         <input type="text" class="form-control" id="profile-addr-zipcode"
                                                th:field="*{address.zip}" th:value="*{address.zip}"
-                                               name="profile-addr-zipcode" required>
+                                               name="zip">
                                         <span th:if="${#fields.hasErrors('address.zip')}"
                                               th:errors="*{address.zip}" th:errorclass="error"></span>
-                                    </div><!-- End .form-group -->
-<!--                                    <div class="form-group">-->
-<!--                                        <label for="profile-payment" th:text="#{reg.payment}">Payment *</label>-->
-<!--                                        <input type="text" class="form-control" id="profile-payment"-->
-<!--                                               th:field="*{payment}" th:value="*{payment}"-->
-<!--                                               name="payment" required>-->
-<!--                                        <span th:if="${#fields.hasErrors('payment')}" th:errors="*{payment}"-->
-<!--                                              th:errorclass="error"></span>-->
-<!--                                    </div>&lt;!&ndash; End .form-group &ndash;&gt;-->
+                                    </div>
 
                                     <div class="form-footer">
                                         <button type="submit" class="btn btn-outline-primary-2">

@@ -22,9 +22,14 @@ public class UserService implements IUserService {
 
     public User save(User user) {
 
-        boolean isExists = this.getByUsername(user.getUserName()) != null ? true : false;
+        boolean isExists = user.getUserName() != null && user.getId() > 0 ? true : false;
         if (!isExists)
             user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        return userRepository.save(user);
+    }
+
+    public User saveRole(User user){
         return userRepository.save(user);
     }
 
@@ -52,8 +57,11 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public <T extends User> T saveProfile(T user) {
-        return null;
+    public User saveProfile(User user) {
+        User u = this.getByUsername(user.getUserName());
+        u.merge(user);
+
+        return userRepository.save(u);
     }
 
     @Override
