@@ -6,6 +6,7 @@ import miu.edu.product.exception.OrderCreateException;
 import miu.edu.product.repository.OnlineOrderRepository;
 import miu.edu.product.repository.ProductRepository;
 import miu.edu.product.repository.VendorRepository;
+import miu.edu.product.sender.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,9 @@ public class OrderServiceImp implements OrderService {
     private final OnlineOrderRepository orderRepository;
     private final ProductRepository productRepository;
     private final VendorRepository vendorRepository;
+
+    @Autowired
+    MailService mailService;
 
     @Autowired
     public OrderServiceImp(OnlineOrderRepository orderRepository,
@@ -111,6 +115,8 @@ public class OrderServiceImp implements OrderService {
         else orderRepository.updateDateDelivered(null, id);
 
         orderRepository.updateStatus(status, id);
+        OnlineOrder order =orderRepository.findById(id).get();
+        mailService.sendMail(order.getVendor().getEmail(),getHTML(order));
 
     }
 
@@ -125,5 +131,36 @@ public class OrderServiceImp implements OrderService {
     public static <T> List<T> toList(final Iterable<T> iterable) {
         return StreamSupport.stream(iterable.spliterator(), false)
                 .collect(Collectors.toList());
+    }
+    private String getHTML(OnlineOrder order){
+        String result =" ";
+        result = "<div>\n" +
+                "   <h2> The Order  "+ order.getsStatus()+"</h2>\n" +
+                "\n" +
+                "   <h4>Hello "+order.getCustomer().getFirstName()+" "+order.getCustomer().getLastName() +",<br>\n" +
+                "       Thank you for shopping with us. We’ll send a confirmation when your item ships.\n" +
+                "   </h4>\n" +
+                "   <pre> Details\n" +
+                "\n" +
+                "    Order "+order.getOrderno()+"\n" +
+                "\n" +
+                "    Arriving:\n" +
+                "    Friday, May 14\n" +
+                "\n" +
+                "\n" +
+                "    View or manage order\n" +
+                "    Ship to:\n" +
+                "    The\n" +
+                "    GARDEN GROVE, CA\n" +
+                "    Order Total:\n" +
+                "    "+order.getTotal()+"\n" +
+                "\n" +
+                "    We hope to see you again soon.\n" +
+                "\n" +
+                "    Group3CS490PM</pre>\n" +
+                "\n" +
+                "</div>";
+
+        return result;
     }
 }
