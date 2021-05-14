@@ -2,6 +2,7 @@ package miu.edu.product.service;
 
 
 import miu.edu.product.domain.Product;
+import miu.edu.product.domain.ProductStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -18,5 +19,6 @@ public interface ProductService {
    List<Product> getByCategory(Integer categoryid);
    public Product update(Product product);
    public void activeProduct(Integer productnumber);
+   List<Product> findAllByStatus(ProductStatus status);
 
 }

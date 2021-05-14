@@ -2,6 +2,7 @@ package miu.edu.product.repository;
 
 
 import miu.edu.product.domain.Product;
+import miu.edu.product.domain.ProductStatus;
 import miu.edu.product.domain.Vendor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,6 +17,9 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> getByCategory(@Param("id") Integer id);
 
     List<Product> findAllByVendor(Vendor vendor);
+
+    @Query("SELECT p FROM Product p where p.status= :status")
+    List<Product> findAllByStatus(@Param("status") ProductStatus status);
 
     @Query(value = "select p.* " +
             " from scheduled_deliveries o, scheduled_deliveries_OrderDetail oi, orderdetail i, product p, vendor v " +

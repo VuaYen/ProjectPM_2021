@@ -1,9 +1,6 @@
 package miu.edu.product.web;
 
-import miu.edu.product.domain.ApiResponse;
-import miu.edu.product.domain.OrderStatus;
-import miu.edu.product.domain.Product;
-import miu.edu.product.domain.Vendor;
+import miu.edu.product.domain.*;
 import miu.edu.product.dto.ReportRequestDTO;
 import miu.edu.product.dto.ReportResponseDTO;
 import miu.edu.product.repository.VendorRepository;
@@ -79,7 +76,7 @@ public class ProductInController {
     @GetMapping("approve")
     public String productsregister(Model model, HttpServletRequest request){
 
-        List<Product> productOptional = productService.all();
+        List<Product> productOptional = productService.findAllByStatus(ProductStatus.New);
 
         model.addAttribute("products", productOptional);
 
@@ -91,7 +88,7 @@ public class ProductInController {
         try {
 
             productService.activeProduct(id);
-            return "redirect:/admin/productsreg";
+            return "redirect:/admin/approve";
         }
         catch(Exception ex){
 

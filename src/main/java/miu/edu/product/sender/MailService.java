@@ -8,4 +8,5 @@ public interface MailService {
     Object sendMailHTML();
     Object sendMailCC();
     Object sendMail(@RequestBody String to);
+    Object sendMail(@RequestBody String to,String content);
 }
