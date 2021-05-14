@@ -42,12 +42,12 @@
                                 <input th:id="${order.id+'_order'}" name="id" th:value="${order.id}" type="hidden">
                                 <select name="status" th:id="${order.id+'_select'}">
                                     <option value="NEW" th:text="New" th:selected="${order.sStatus=='NEW'}"></option>
-                                    <option value="RECEIVED" th:text="New" th:selected="${order.sStatus=='RECEIVED'}"></option>
+                                    <option value="RECEIVED" th:text="Receive" th:selected="${order.sStatus=='RECEIVED'}"></option>
                                     <option value="SHIPPED" th:text="Shipped" th:selected="${order.sStatus=='SHIPPED'}"></option>
-                                    <option value="OnTheWay" th:text="OnTheWay" th:selected="${order.sStatus=='ON_THE_WAY'}"></option>
-                                    <option value="ON_THE_WAY" th:text="Delivered" th:selected="${order.sStatus=='DELIVERED'}"></option>
+                                    <option value="ON_THE_WAY" th:text="OnTheWay" th:selected="${order.sStatus=='ON_THE_WAY'}"></option>
+                                    <option value="DELIVERED" th:text="Delivered" th:selected="${order.sStatus=='DELIVERED'}"></option>
                                     <option value="CANCELLED" th:text="Cancel" th:selected="${order.sStatus=='CANCELLED'}"></option>
-                                    <option value="DELETED" th:text="Cancel" th:selected="${order.sStatus=='DELETED'}"></option>
+                                    <option value="DELETED" th:text="Delete" th:selected="${order.sStatus=='DELETED'}"></option>
 
                                 </select>
                                 <input th:id="${order.id+'_submit'}" type="submit" value="update" />

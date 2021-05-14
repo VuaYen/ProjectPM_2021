@@ -63,6 +63,9 @@
 
                     </tbody>
                 </table>
+                <form  th:action="@{'/api/report/pdf/full-report'}" method="get">
+                    <input th:id="${ '_bt'}" type="submit" value="See full report">
+                </form>
             </div>
         </div>
     </div>
